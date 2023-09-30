@@ -1,0 +1,7 @@
+/node_modules
+/kubernetes
+Dockerfile
+.gitignore
+.env
+.env.development
+.env.production
