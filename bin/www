@@ -7,6 +7,7 @@
 const app = require("../app");
 const debug = require("debug")("codebase-orm:server");
 const http = require("http");
+const DBConn = require("../db");
 
 /**
  * Get port from environment and store in Express.
@@ -25,9 +26,20 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on("error", onError);
-server.on("listening", onListening);
+const connection = async () => {
+  try {
+    DBConn.authenticate();
+    server.listen(port);
+    server.on("error", onError);
+    server.on("listening", onListening);
+    await DBConn.sync();
+    console.log("Success connect to server!");
+  } catch (err) {
+    console.log("Connection error: Failed to connect Server!");
+  }
+};
+
+connection();
 
 /**
  * Normalize a port into a number, string, or false.
