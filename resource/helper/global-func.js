@@ -1,21 +1,15 @@
 const Mustache = require("mustache");
 const nodemailer = require("nodemailer");
-const {
-  emailHost,
-  emailPort,
-  emailSecure,
-  emailSender,
-  emailPassword,
-} = require("../utils/config");
+const ENV = require("../utils/config");
 
 const transporter = nodemailer.createTransport({
-  host: emailHost,
-  port: emailPort,
-  secure: emailSecure, // true for 465, false for other ports
+  host: ENV.emailHost,
+  port: ENV.emailPort,
+  secure: ENV.emailSecure, // true for 465, false for other ports
   auth: {
-    user: emailSender,
+    user: ENV.emailSender,
     // password device
-    pass: emailPassword,
+    pass: ENV.emailPassword,
   },
 });
 
@@ -28,7 +22,7 @@ const sendEmail = async ({ template, payload, receive, subject }) => {
 
   // create instance email/config email
   let message = {
-    from: emailSender,
+    from: ENV.emailSender,
     to: receive,
     subject,
     html: Mustache.render(tempFile, payload),

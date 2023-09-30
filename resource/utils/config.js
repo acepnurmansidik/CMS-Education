@@ -1,14 +1,14 @@
 const dotEnv = require("dotenv");
 dotEnv.config();
 
-module.exports = {
+const ENV = {
   userName: process.env.DB_USER,
   hostName: process.env.DB_HOST,
   password: process.env.DB_PASS,
   databaseName: process.env.DB_NAME,
   timeZone: process.env.DB_TZ,
   maxPool: process.env.MAX_POOL,
-  port: process.env.DB_PORT,
+  dbPort: process.env.DB_PORT,
   jwtID: process.env.JWT_ID,
   jwtExpired: process.env.TOKEN_EXPIRED,
   jwtRefreshExpired: process.env.REFRESH_TOKEN_EXPIRED,
@@ -20,3 +20,5 @@ module.exports = {
   emailSender: process.env.SOURCE_EMAIL,
   emailPassword: process.env.PASSWORD_EMAIL,
 };
+
+module.exports = ENV;
