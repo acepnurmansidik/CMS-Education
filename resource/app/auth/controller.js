@@ -45,21 +45,25 @@ controller.Login = async (req, res, next) => {
     if (!email || !password)
       throw new BadRequestError("Credentials is invalid");
     // get data from databse by email
-    const result = await UserModel.findOne({ where: { email } });
+    const data = await UserModel.findOne({
+      where: { email },
+      attributes: ["password", "email"],
+    });
 
     // compare password from input with saving database
     const isMatch = await globalFunc.verifyPassword({
-      hashPassword: result.password,
+      hashPassword: data.password,
       password,
     });
     // send error password no match
-    if (!isMatch)throw new BadRequestError("Credentials is invalid");
+    if (!isMatch) throw new BadRequestError("Credentials is invalid");
 
     // create JWT token for response
+    const result = await globalFunc.generateJwtToken(data.toJSON());
 
-    response.MethodResponse(res, methodConstant.POST, result);
+    response.MethodResponse(res, methodConstant.GET, result);
   } catch (err) {
-    next(err)
+    next(err);
   }
 };
 
