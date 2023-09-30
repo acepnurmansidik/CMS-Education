@@ -33,7 +33,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     customError.statusCode = 404;
   }
 
-  return response.ErrorResponse(res, customError.statusCode, customError.msg);
+  response.ErrorResponse(res, customError.statusCode, customError.msg);
 };
 
 module.exports = errorHandlerMiddleware;

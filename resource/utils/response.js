@@ -47,7 +47,7 @@ response.GetPaginationResponse = (res, data, page, page_size, total) => {
 };
 
 response.ErrorResponse = (res, code, message) => {
-  return response.status(StatusCodes.BAD_REQUEST).json({
+  return res.status(StatusCodes.BAD_REQUEST).json({
     code,
     status: false,
     message,

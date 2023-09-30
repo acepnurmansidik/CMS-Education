@@ -1,6 +1,7 @@
 const Mustache = require("mustache");
 const nodemailer = require("nodemailer");
 const ENV = require("../utils/config");
+const bcrypt = require("bcrypt");
 
 const transporter = nodemailer.createTransport({
   host: ENV.emailHost,
@@ -13,7 +14,9 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const sendEmail = async ({ template, payload, receive, subject }) => {
+const globalFunc = {};
+
+globalFunc.sendEmail = async ({ template, payload, receive, subject }) => {
   // Get template email from html file
   const tempFile = fs.readFileSync(
     `resource/app/templates/html/${template}.html`,
@@ -32,4 +35,12 @@ const sendEmail = async ({ template, payload, receive, subject }) => {
   return await transporter.sendMail(message);
 };
 
-module.exports = { sendEmail };
+globalFunc.hashPassword = async ({ password }) => {
+  return await bcrypt.hash(password, 12);
+};
+
+globalFunc.verifyPassword = async ({ password, hashPassword }) => {
+  return await bcrypt.compare(password, hashPassword);
+};
+
+module.exports = globalFunc;

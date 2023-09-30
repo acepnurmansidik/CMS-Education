@@ -13,7 +13,7 @@
   ],
   "securityDefinitions": {},
   "paths": {
-    "/users/": {
+    "/singup": {
       "post": {
         "tags": [
           "Master Role"
@@ -33,6 +33,30 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/signin": {
+      "post": {
+        "tags": [
+          "Master Role"
+        ],
+        "summary": "role user",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create role",
+            "schema": {
+              "$ref": "#/definitions/BodyUserSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
           }
         }
       }

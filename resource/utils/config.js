@@ -19,6 +19,7 @@ const ENV = {
   emailSecure: process.env.SECURE_EMAIL,
   emailSender: process.env.SOURCE_EMAIL,
   emailPassword: process.env.PASSWORD_EMAIL,
+  saltPassword: process.env.SALT,
 };
 
 module.exports = ENV;
