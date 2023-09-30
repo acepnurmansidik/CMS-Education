@@ -1,0 +1,86 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "localhost:3022",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {},
+  "paths": {
+    "/users/": {
+      "post": {
+        "tags": [
+          "Master Role"
+        ],
+        "summary": "role user",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create role",
+            "schema": {
+              "$ref": "#/definitions/BodyUserSchema"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BodyUserSchema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "example@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "example secret"
+        }
+      }
+    },
+    "QueryUserSchema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "example@gmail.com"
+        }
+      }
+    },
+    "NotFound": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "number",
+          "example": 404
+        },
+        "status": {
+          "type": "boolean",
+          "example": false
+        },
+        "message": {
+          "type": "string",
+          "example": "Data not found!"
+        },
+        "data": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    }
+  }
+}

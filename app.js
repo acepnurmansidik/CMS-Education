@@ -8,6 +8,10 @@ const indexRouter = require("./routes/index");
 const middlewareRoute = require("./resource/middleware/not-found");
 const middlewarErrorHandler = require("./resource/middleware/handle-error");
 
+// Swagger
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger-output.json"); //
+
 const app = express();
 
 app.use(logger("dev"));
@@ -16,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/", indexRouter);
 
 // middleware
