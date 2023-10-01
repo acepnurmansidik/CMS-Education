@@ -31,17 +31,17 @@
         "description": "every user has role for access",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "obj",
             "in": "body",
             "description": "Create role",
             "schema": {
               "$ref": "#/definitions/BodyUserSchema"
             }
-          },
-          {
-            "name": "user-agent",
-            "in": "header",
-            "type": "string"
           }
         ],
         "responses": {
@@ -79,6 +79,144 @@
           }
         }
       }
+    },
+    "/ref-param/{id}": {
+      "get": {
+        "tags": [
+          "SYS REF PARAMETER"
+        ],
+        "summary": "Ref parameter",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Some description..."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SYS REF PARAMETER"
+        ],
+        "summary": "Ref parameter",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Some description..."
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create reference parameter",
+            "schema": {
+              "$ref": "#/definitions/BodyRefParameterSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SYS REF PARAMETER"
+        ],
+        "summary": "Ref parameter",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Some description..."
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/ref-param/": {
+      "get": {
+        "tags": [
+          "SYS REF PARAMETER"
+        ],
+        "summary": "Ref parameter",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "type",
+            "default": "level",
+            "description": "Some description...",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "value",
+            "description": "Some description...",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "default": 10,
+            "description": "Some description...",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "default": 1,
+            "description": "Some description...",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SYS REF PARAMETER"
+        ],
+        "summary": "Ref parameter",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create reference parameter",
+            "schema": {
+              "$ref": "#/definitions/BodyRefParameterSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -104,6 +242,23 @@
         }
       }
     },
+    "BodyRefParameterSchema": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "example": "X"
+        },
+        "type": {
+          "type": "string",
+          "example": "level"
+        },
+        "description": {
+          "type": "string",
+          "example": "Tingkat kelas"
+        }
+      }
+    },
     "NotFound": {
       "type": "object",
       "properties": {
@@ -120,6 +275,15 @@
           "example": "Data not found!"
         },
         "data": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "QueryIdSchema": {
+      "type": "object",
+      "properties": {
+        "id": {
           "type": "string",
           "example": ""
         }

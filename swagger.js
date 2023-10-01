@@ -24,6 +24,9 @@ const doc = {
       message: "Data not found!",
       data: "",
     },
+    QueryIdSchema: {
+      id: "",
+    },
   }, // by default: empty object (Swagger 2.0)
   components: {}, // by default: empty object (OpenAPI 3.x)
   // securityDefinitions: {
