@@ -3,6 +3,7 @@ const { SysRefParameterModel } = require("../../models/sys-ref-parameter");
 const { methodConstant } = require("../../utils/constanta");
 const { Sequelize } = require("sequelize");
 const { NotFoundError } = require("../../utils/errors");
+const { globalFunc } = require("../../helper/global-func");
 
 const controller = {};
 
@@ -20,9 +21,12 @@ controller.Index = async (req, res, next) => {
     // get data from body payload
     const { limit, page, ...query } = req.query;
 
+    const where = await globalFunc.QuerySearch([
+      { opr: "iLike", values: { ...query } },
+    ]);
     // search on database
     const result = await SysRefParameterModel.findAll({
-      where: { ...query },
+      where,
       offset: page - 1,
       limit,
     });

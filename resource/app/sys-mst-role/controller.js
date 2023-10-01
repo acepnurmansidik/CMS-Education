@@ -3,6 +3,7 @@ const { SysMasterRoleModel } = require("../../models/sys-mst-role");
 const { methodConstant } = require("../../utils/constanta");
 const { Sequelize, Op } = require("sequelize");
 const { NotFoundError } = require("../../utils/errors");
+const { globalFunc } = require("../../helper/global-func");
 
 const controller = {};
 
@@ -19,13 +20,13 @@ controller.Index = async (req, res, next) => {
     // get data from body payload
     const { limit, page, role_name } = req.query;
 
+    const where = await globalFunc.QuerySearch([
+      { opr: "iLike", values: { role_name } },
+    ]);
+
     // search on database
     const result = await SysMasterRoleModel.findAll({
-      where: {
-        role_name: {
-          [Op.iLike]: `%${role_name}%`,
-        },
-      },
+      where,
       offset: page - 1,
       limit,
     });
