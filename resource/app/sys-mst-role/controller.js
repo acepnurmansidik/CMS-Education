@@ -1,28 +1,31 @@
 const response = require("../../utils/response");
-const { SysRefParameterModel } = require("../../models/sys-ref-parameter");
+const { SysMasterRoleModel } = require("../../models/sys-mst-role");
 const { methodConstant } = require("../../utils/constanta");
-const { Sequelize } = require("sequelize");
+const { Sequelize, Op } = require("sequelize");
 const { NotFoundError } = require("../../utils/errors");
 
 const controller = {};
 
 controller.Index = async (req, res, next) => {
   /* 
-    #swagger.tags = ['SYS REF PARAMETER']
-    #swagger.summary = 'Ref parameter'
+    #swagger.tags = ['SYS MASTER ROLE']
+    #swagger.summary = 'Master Roler'
     #swagger.description = 'every user has role for access'
-    #swagger.parameters['type'] = { default: 'level', description: 'Search by type' }
-    #swagger.parameters['value'] = { description: 'Search by value' }
+    #swagger.parameters['role_name'] = { default: 'Admin', description: 'Search by role_name' }
     #swagger.parameters['limit'] = { default: 10, description: 'Limit data show' }
     #swagger.parameters['page'] = { default: 1, description: 'Page data show' }
   */
   try {
     // get data from body payload
-    const { limit, page, ...query } = req.query;
+    const { limit, page, role_name } = req.query;
 
     // search on database
-    const result = await SysRefParameterModel.findAll({
-      where: { ...query },
+    const result = await SysMasterRoleModel.findAll({
+      where: {
+        role_name: {
+          [Op.iLike]: `%${role_name}%`,
+        },
+      },
       offset: page - 1,
       limit,
     });
@@ -39,26 +42,20 @@ controller.Index = async (req, res, next) => {
 
 controller.Create = async (req, res, next) => {
   /* 
-    #swagger.tags = ['SYS REF PARAMETER']
-    #swagger.summary = 'Ref parameter'
+    #swagger.tags = ['SYS MASTER ROLE']
+    #swagger.summary = 'Master Role'
     #swagger.description = 'every user has role for access'
     #swagger.parameters['obj'] = {
       in: 'body',
-      description: 'Create reference parameter',
-      schema: { $ref: '#/definitions/BodyRefParameterSchema' }
+      description: 'Create new role',
+      schema: { $ref: '#/definitions/BodyMasterRoleSchema' }
     }
   */
   try {
     // get data from body payload
     const payload = req.body;
-    // check same type in database
-    let result = await SysRefParameterModel.findOne({
-      order: [[Sequelize.literal("key"), "DESC"]],
-    });
-    // if same increament key +1
-    payload.key = Number(result.key) ? Number(result.key) + 1 : 1;
     // saving to database
-    result = await SysRefParameterModel.create(payload);
+    const result = await SysMasterRoleModel.create(payload);
     // send response
     response.MethodResponse(res, methodConstant.POST, result);
   } catch (err) {
@@ -68,8 +65,8 @@ controller.Create = async (req, res, next) => {
 
 controller.FindOne = async (req, res, next) => {
   /* 
-    #swagger.tags = ['SYS REF PARAMETER']
-    #swagger.summary = 'Ref parameter'
+    #swagger.tags = ['SYS MASTER ROLE']
+    #swagger.summary = 'Master Role'
     #swagger.description = 'every user has role for access'
     #swagger.parameters['id'] = { description: 'get data by id using uuid' }
   */
@@ -77,7 +74,7 @@ controller.FindOne = async (req, res, next) => {
     // get data from body payload
     const id = req.params.id;
     // check same type in database
-    const result = await SysRefParameterModel.findOne({ where: { id } });
+    const result = await SysMasterRoleModel.findOne({ where: { id } });
     // send response 404 when data not found
     if (!result) throw new NotFoundError("Data not found!");
     // send response
@@ -89,14 +86,14 @@ controller.FindOne = async (req, res, next) => {
 
 controller.Update = async (req, res, next) => {
   /* 
-    #swagger.tags = ['SYS REF PARAMETER']
-    #swagger.summary = 'Ref parameter'
+    #swagger.tags = ['SYS MASTER ROLE']
+    #swagger.summary = 'Master Role'
     #swagger.description = 'every user has role for access'
     #swagger.parameters['id'] = { description: 'get data by id using uuid' }
     #swagger.parameters['obj'] = {
       in: 'body',
       description: 'Create reference parameter',
-      schema: { $ref: '#/definitions/BodyRefParameterSchema' }
+      schema: { $ref: '#/definitions/BodyMasterRoleSchema' }
     }
   */
   try {
@@ -104,11 +101,11 @@ controller.Update = async (req, res, next) => {
     const id = req.params.id;
     const payload = req.body;
     // check same type in database
-    const result = await SysRefParameterModel.findOne({ where: { id } });
+    const result = await SysMasterRoleModel.findOne({ where: { id } });
     // send response 404 when data not found
     if (!result) throw new NotFoundError("Data not found!");
     // update data
-    await SysRefParameterModel.update(payload, { where: { id } });
+    await SysMasterRoleModel.update(payload, { where: { id } });
     // send response
     response.MethodResponse(res, methodConstant.PUT, null);
   } catch (err) {
@@ -118,8 +115,8 @@ controller.Update = async (req, res, next) => {
 
 controller.Delete = async (req, res, next) => {
   /* 
-    #swagger.tags = ['SYS REF PARAMETER']
-    #swagger.summary = 'Ref parameter'
+    #swagger.tags = ['SYS MASTER ROLE']
+    #swagger.summary = 'Master Role'
     #swagger.description = 'every user has role for access'
     #swagger.parameters['id'] = { description: 'get data by id using uuid' }
   */
@@ -127,11 +124,11 @@ controller.Delete = async (req, res, next) => {
     // get data from body payload
     const id = req.params.id;
     // check same type in database
-    let result = await SysRefParameterModel.findOne({ where: { id } });
+    let result = await SysMasterRoleModel.findOne({ where: { id } });
     // send response 404 when data not found
     if (!result) throw new NotFoundError("Data not found!");
     // update data
-    await SysRefParameterModel.destroy({ where: { id } });
+    await SysMasterRoleModel.destroy({ where: { id } });
     // send response
     response.MethodResponse(res, methodConstant.DELETE, result);
   } catch (err) {

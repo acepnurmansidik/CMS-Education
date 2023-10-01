@@ -93,7 +93,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Some description..."
+            "description": "get data by id using uuid"
           }
         ],
         "responses": {
@@ -114,7 +114,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Some description..."
+            "description": "get data by id using uuid"
           },
           {
             "name": "obj",
@@ -143,7 +143,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Some description..."
+            "description": "get data by id using uuid"
           }
         ],
         "responses": {
@@ -164,27 +164,27 @@
           {
             "name": "type",
             "default": "level",
-            "description": "Some description...",
+            "description": "Search by type",
             "in": "query",
             "type": "string"
           },
           {
             "name": "value",
-            "description": "Some description...",
+            "description": "Search by value",
             "in": "query",
             "type": "string"
           },
           {
             "name": "limit",
             "default": 10,
-            "description": "Some description...",
+            "description": "Limit data show",
             "in": "query",
             "type": "string"
           },
           {
             "name": "page",
             "default": 1,
-            "description": "Some description...",
+            "description": "Page data show",
             "in": "query",
             "type": "string"
           }
@@ -208,6 +208,138 @@
             "description": "Create reference parameter",
             "schema": {
               "$ref": "#/definitions/BodyRefParameterSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/master-role/{id}": {
+      "get": {
+        "tags": [
+          "SYS MASTER ROLE"
+        ],
+        "summary": "Master Role",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SYS MASTER ROLE"
+        ],
+        "summary": "Master Role",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create reference parameter",
+            "schema": {
+              "$ref": "#/definitions/BodyMasterRoleSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SYS MASTER ROLE"
+        ],
+        "summary": "Master Role",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/master-role/": {
+      "get": {
+        "tags": [
+          "SYS MASTER ROLE"
+        ],
+        "summary": "Master Roler",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "role_name",
+            "default": "Admin",
+            "description": "Search by role_name",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "default": 10,
+            "description": "Limit data show",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "default": 1,
+            "description": "Page data show",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SYS MASTER ROLE"
+        ],
+        "summary": "Master Role",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create new role",
+            "schema": {
+              "$ref": "#/definitions/BodyMasterRoleSchema"
             }
           }
         ],
@@ -256,6 +388,15 @@
         "description": {
           "type": "string",
           "example": "Tingkat kelas"
+        }
+      }
+    },
+    "BodyMasterRoleSchema": {
+      "type": "object",
+      "properties": {
+        "role_name": {
+          "type": "string",
+          "example": "Admin"
         }
       }
     },

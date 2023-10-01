@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const DBConn = require("../../db");
-const { BadRequestError } = require("../utils/errors");
 
 const SysRefParameterModelDefine = {
   key: {
