@@ -16,7 +16,6 @@ const doc = {
   consumes: [], // by default: ['application/json']
   produces: [], // by default: ['application/json']
   tags: [],
-  securityDefinitions: {}, // by default: empty object
   definitions: {
     ...GlobalSchema,
     NotFound: {
@@ -27,6 +26,24 @@ const doc = {
     },
   }, // by default: empty object (Swagger 2.0)
   components: {}, // by default: empty object (OpenAPI 3.x)
+  // securityDefinitions: {
+  //   apiKeyAuth: {
+  //     type: "apiKey",
+  //     in: "header", // can be 'header', 'query' or 'cookie'
+  //     name: "X-API-KEY", // name of the header, query parameter or cookie
+  //     description: "Some description...",
+  //   },
+  // },
+  securityDefinitions: {
+    bearerAuth: {
+      type: "apiKey",
+      in: "header",
+      scheme: "bearer",
+      name: "Authorization",
+      bearerFormat: "JWT",
+      description: "Please insert JWT format!",
+    },
+  },
 };
 
 swaggerAutogen(outputFile, endpointsFiles, doc);

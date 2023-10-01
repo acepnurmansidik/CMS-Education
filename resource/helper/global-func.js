@@ -3,6 +3,7 @@ const nodemailer = require("nodemailer");
 const ENV = require("../utils/config");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { UnauthenticatedError } = require("../utils/errors");
 
 const transporter = nodemailer.createTransport({
   host: ENV.emailHost,
@@ -72,11 +73,14 @@ globalFunc.generateJwtToken = async (payload, next) => {
 const verifyJwtToken = async (token, next) => {
   try {
     // verify token
-    const decode = await jwt.verify(token, ENV.secretToken);
+    const decode = await jwt.verify(token, ENV.secretToken, (err, decode) => {
+      if (err) throw new UnauthenticatedError(err.message);
+      if (!err) return decode;
+    });
     return decode;
   } catch (err) {
     next(err);
   }
 };
 
-module.exports = globalFunc;
+module.exports = { globalFunc, verifyJwtToken };

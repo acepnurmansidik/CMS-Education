@@ -11,7 +11,16 @@
     "http",
     "https"
   ],
-  "securityDefinitions": {},
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "scheme": "bearer",
+      "name": "Authorization",
+      "bearerFormat": "JWT",
+      "description": "Please insert JWT format!"
+    }
+  },
   "paths": {
     "/singup": {
       "post": {
@@ -28,13 +37,23 @@
             "schema": {
               "$ref": "#/definitions/BodyUserSchema"
             }
+          },
+          {
+            "name": "user-agent",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/signin": {

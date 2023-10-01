@@ -1,4 +1,4 @@
-const globalFunc = require("../../helper/global-func");
+const { globalFunc } = require("../../helper/global-func");
 const { UserModel } = require("../../models/user");
 const bcrypt = require("bcrypt");
 const { BadRequestError } = require("../../utils/errors/index");
@@ -8,6 +8,11 @@ const { methodConstant } = require("../../utils/constanta");
 
 const controller = {};
 controller.Register = async (req, res, next) => {
+  /* 
+    #swagger.security = [{
+      "bearerAuth": []
+    }] 
+  */
   /* 
     #swagger.tags = ['Master Role']
     #swagger.summary = 'role user'
