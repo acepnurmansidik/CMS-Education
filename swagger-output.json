@@ -547,6 +547,29 @@
           }
         }
       }
+    },
+    "/menu/{id}": {
+      "get": {
+        "tags": [
+          "SYS MENU"
+        ],
+        "summary": "Menu",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {

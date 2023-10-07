@@ -1,4 +1,5 @@
 const { globalFunc } = require("../../helper/global-func");
+const { SysMenuModel } = require("../../models/sys-menu");
 const { SysMasterModulModel } = require("../../models/sys-mst-modul");
 const { compaOpr, methodConstant } = require("../../utils/constanta");
 const { NotFoundError } = require("../../utils/errors");
@@ -23,11 +24,19 @@ controller.Index = async (req, res, next) => {
       { opr: compaOpr.ILIKE, values: { modul_name } },
     ]);
 
+    const include = globalFunc.JoinsRelation([
+      {
+        model: SysMenuModel,
+        include: [],
+      },
+    ]);
+
     // get data from database
     const result = await SysMasterModulModel.findAll({
       where,
       offset: page - 1,
       limit,
+      include,
     });
 
     // send success response
@@ -70,8 +79,18 @@ controller.FindOne = async (req, res, next) => {
   try {
     // get data from body payload
     const id = req.params.id;
+    // joins
+    const include = globalFunc.JoinsRelation([
+      {
+        model: SysMenuModel,
+        include: [],
+      },
+    ]);
     // checking data from database
-    const result = await SysMasterModulModel.findOne({ where: { id } });
+    const result = await SysMasterModulModel.findOne({
+      where: { id },
+      include,
+    });
     // send error data not found
     if (!result) throw NotFoundError("Data not found!");
     // send success response

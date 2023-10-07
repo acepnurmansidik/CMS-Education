@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const DBConn = require("../../db");
+const { SysMasterModulModel } = require("./sys-mst-modul");
 
 const SysMenuModelDefine = {
   menu_name: {
@@ -10,6 +11,10 @@ const SysMenuModelDefine = {
   mst_modul_id: {
     type: DataTypes.UUID,
     allowNull: false,
+    references: {
+      model: SysMasterModulModel,
+      key: "id",
+    },
   },
 };
 
@@ -21,6 +26,10 @@ const SysMenuModel = DBConn.define("sys_menu", SysMenuModelDefine, {
   updatedAt: true,
   paranoid: true,
 });
+
+// Definisikan relasi
+SysMenuModel.belongsTo(SysMasterModulModel, { foreignKey: "mst_modul_id" });
+SysMasterModulModel.hasMany(SysMenuModel, { foreignKey: "mst_modul_id" });
 
 Object.keys(SysMenuModelDefine).map((item) => {
   SysMenuModelDefine[item] = SysMenuModelDefine[item]["defaultValue"]

@@ -9,6 +9,9 @@ const controller = require("./controller");
  * @returns {Error} 500 - Internal server error
  */
 router.get("/", controller.Index);
+router.get("/:id", controller.FindOne);
+router.delete("/:id", controller.Delete);
+router.purge("/:id", controller.Update);
 router.post("/", controller.Create);
 
 module.exports = router;
