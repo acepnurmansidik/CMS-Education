@@ -125,39 +125,49 @@ globalFunc.QuerySearch = async (payload) => {
   const result = {};
   for (const everyData of payload) {
     Object.keys(everyData["values"]).map((item) => {
-      result[item] = {
-        [Op[everyData["opr"]]]: `%${everyData["values"][item]}%`,
-      };
-      if ([compaOpr.ILIKE, compaOpr.NOT_ILIKE].includes(everyData["opr"])) {
+      if (everyData["values"][item] && !["_id"].includes(item)) {
         result[item] = {
           [Op[everyData["opr"]]]: `%${everyData["values"][item]}%`,
         };
-      } else if (
-        [
-          compaOpr.IN,
-          compaOpr.NOT_IN,
-          compaOpr.BETWEEN,
-          compaOpr.NOT_BETWEEN,
-        ].includes(everyData["opr"])
-      ) {
-        let temp = [
-          ...everyData["values"][item],
-          `${everyData["values"][item]}`,
-        ];
-        result[item] = {
-          [Op[everyData["opr"]]]: temp,
-        };
-      } else if ([compaOpr.AND, compaOpr.OR].includes(everyData["opr"])) {
+        if ([compaOpr.ILIKE, compaOpr.NOT_ILIKE].includes(everyData["opr"])) {
+          result[item] = {
+            [Op[everyData["opr"]]]: `%${everyData["values"][item]}%`,
+          };
+        } else if (
+          [
+            compaOpr.IN,
+            compaOpr.NOT_IN,
+            compaOpr.BETWEEN,
+            compaOpr.NOT_BETWEEN,
+          ].includes(everyData["opr"])
+        ) {
+          let temp = [
+            ...everyData["values"][item],
+            `${everyData["values"][item]}`,
+          ];
+          result[item] = {
+            [Op[everyData["opr"]]]: temp,
+          };
+        } else if ([compaOpr.AND, compaOpr.OR].includes(everyData["opr"])) {
+          let temp = [
+            ...everyData["values"][item],
+            { item: `${everyData["values"][item]}` },
+          ];
+          result[item] = {
+            [Op[everyData["opr"]]]: temp,
+          };
+        } else {
+          result[item] = {
+            [Op[everyData["opr"]]]: `${everyData["values"][item]}`,
+          };
+        }
+      } else if (everyData["values"][item] && ["_id"].includes(item)) {
         let temp = [
           ...everyData["values"][item],
           { item: `${everyData["values"][item]}` },
         ];
         result[item] = {
           [Op[everyData["opr"]]]: temp,
-        };
-      } else {
-        result[item] = {
-          [Op[everyData["opr"]]]: `${everyData["values"][item]}`,
         };
       }
     });

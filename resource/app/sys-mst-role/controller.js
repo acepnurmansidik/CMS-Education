@@ -18,10 +18,10 @@ controller.Index = async (req, res, next) => {
   */
   try {
     // get data from body payload
-    const { limit, page, role_name } = req.query;
+    const { limit, page, ...query } = req.query;
 
     const where = await globalFunc.QuerySearch([
-      { opr: "iLike", values: { role_name } },
+      { opr: "iLike", values: { ...query } },
     ]);
 
     // search on database
@@ -35,7 +35,7 @@ controller.Index = async (req, res, next) => {
     if (!result.length) throw new NotFoundError("Data not found!");
 
     // send response
-    response.MethodResponse(res, methodConstant.GET, result);
+    response.GetPaginationResponse(res, result, page, limit);
   } catch (err) {
     next(err);
   }
