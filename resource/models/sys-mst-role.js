@@ -3,7 +3,7 @@ const DBConn = require("../../db");
 
 const SysMstRoleModelDefine = {
   role_name: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.STRING,
     allowNull: false,
     defaultValue: "Admin",
   },

@@ -349,6 +349,138 @@
           }
         }
       }
+    },
+    "/master-modul/": {
+      "get": {
+        "tags": [
+          "SYS MASTER MODUL"
+        ],
+        "summary": "Master Modul",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "modul_name",
+            "default": "Dashboard",
+            "description": "Search by role_name",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "default": 10,
+            "description": "Limit data show",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "default": 1,
+            "description": "Page data show",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SYS MASTER MODUL"
+        ],
+        "summary": "Master Modul",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create new role",
+            "schema": {
+              "$ref": "#/definitions/BodyMasterModulSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/master-modul/{id}": {
+      "get": {
+        "tags": [
+          "SYS MASTER MODUL"
+        ],
+        "summary": "Master Modul",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SYS MASTER MODUL"
+        ],
+        "summary": "Master Modul",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create new role",
+            "schema": {
+              "$ref": "#/definitions/BodyMasterModulSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SYS MASTER MODUL"
+        ],
+        "summary": "Master Modul",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -397,6 +529,15 @@
         "role_name": {
           "type": "string",
           "example": "Admin"
+        }
+      }
+    },
+    "BodyMasterModulSchema": {
+      "type": "object",
+      "properties": {
+        "modul_name": {
+          "type": "string",
+          "example": "Dashboard"
         }
       }
     },
