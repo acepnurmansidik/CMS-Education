@@ -173,7 +173,7 @@ globalFunc.QuerySearch = async (payload) => {
 
 /**
  * -----------------------------------------------
- * | DYNAMIC Joins
+ * | DYNAMIC JOINS
  * -----------------------------------------------
  * | Hey it sounds good and powerfull for
  * | this function, you don't need to bother
