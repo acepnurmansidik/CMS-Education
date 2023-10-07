@@ -31,9 +31,6 @@ controller.Index = async (req, res, next) => {
       limit,
     });
 
-    // resnd response 404 if data not found
-    if (!result.length) throw new NotFoundError("Data not found!");
-
     // send response
     response.GetPaginationResponse(res, result, page, limit);
   } catch (err) {

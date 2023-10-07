@@ -481,6 +481,72 @@
           }
         }
       }
+    },
+    "/menu/": {
+      "get": {
+        "tags": [
+          "SYS MENU"
+        ],
+        "summary": "Menu",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "menu_name",
+            "default": "Dashboard",
+            "description": "Search by menu_name",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "mst_modul_id",
+            "default": "Dashboard",
+            "description": "Search by mst_modul_id",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "default": 10,
+            "description": "Limit data show",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "default": 1,
+            "description": "Page data show",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SYS MENU"
+        ],
+        "summary": "Menu",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create new role",
+            "schema": {
+              "$ref": "#/definitions/BodyMenuSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -539,6 +605,16 @@
           "type": "string",
           "example": "Dashboard"
         }
+      }
+    },
+    "BodyMenuSchema": {
+      "type": "object",
+      "properties": {
+        "menu_name": {
+          "type": "string",
+          "example": "Laporan"
+        },
+        "mst_modul_id": {}
       }
     },
     "NotFound": {

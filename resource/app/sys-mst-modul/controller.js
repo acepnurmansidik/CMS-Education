@@ -30,9 +30,6 @@ controller.Index = async (req, res, next) => {
       limit,
     });
 
-    // send response 404 if ata not found
-    if (!result.length) throw new NotFoundError("Data not Found");
-
     // send success response
     response.GetPaginationResponse(res, result, page, limit);
   } catch (err) {
