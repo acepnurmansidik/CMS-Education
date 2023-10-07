@@ -122,10 +122,12 @@ const verifyJwtToken = async (token, next) => {
  * |
  */
 globalFunc.QuerySearch = async (payload) => {
-  const result = {};
+  let result = {};
+  const _tempAND = [];
+  const _tempOR = [];
   for (const everyData of payload) {
     Object.keys(everyData["values"]).map((item) => {
-      if (everyData["values"][item] && !["_id"].includes(item)) {
+      if (everyData["values"][item] && !item.includes("_id")) {
         result[item] = {
           [Op[everyData["opr"]]]: `%${everyData["values"][item]}%`,
         };
@@ -148,30 +150,26 @@ globalFunc.QuerySearch = async (payload) => {
           result[item] = {
             [Op[everyData["opr"]]]: temp,
           };
-        } else if ([compaOpr.AND, compaOpr.OR].includes(everyData["opr"])) {
-          let temp = [
-            ...everyData["values"][item],
-            { item: `${everyData["values"][item]}` },
-          ];
-          result[item] = {
-            [Op[everyData["opr"]]]: temp,
-          };
+        } else if ([compaOpr.AND].includes(everyData["opr"])) {
+          _tempAND.push({ [item]: `${everyData["values"][item]}` });
+        } else if ([compaOpr.OR].includes(everyData["opr"])) {
+          _tempOR.push({ [item]: `${everyData["values"][item]}` });
         } else {
           result[item] = {
             [Op[everyData["opr"]]]: `${everyData["values"][item]}`,
           };
         }
-      } else if (everyData["values"][item] && ["_id"].includes(item)) {
-        let temp = [
-          ...everyData["values"][item],
-          { item: `${everyData["values"][item]}` },
-        ];
-        result[item] = {
-          [Op[everyData["opr"]]]: temp,
-        };
+      } else if (everyData["values"][item] && item.includes("_id")) {
+        _tempAND.push({ [item]: `${everyData["values"][item]}` });
       }
     });
   }
+
+  result = {
+    ...result,
+    [Op.and]: _tempAND,
+    [Op.or]: _tempOR,
+  };
 
   return result;
 };
