@@ -185,13 +185,6 @@ globalFunc.JoinsRelation = (payload) => {
   for (const everyItem of payload) {
     const subJoins = [];
     if (everyItem["include"].length) {
-      // for (const everySubJoin of everyItem["include"]) {
-      //   subJoins.push({
-      //     model: everyItem["model"],
-      //     where: { deletedAt: null },
-      //     include: subJoins,
-      //   });
-      // }
       subJoins.push(globalFunc.JoinsRelation(everyItem["include"]));
     }
     result.push({
