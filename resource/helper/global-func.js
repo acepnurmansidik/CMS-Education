@@ -165,11 +165,8 @@ globalFunc.QuerySearch = async (payload) => {
     });
   }
 
-  result = {
-    ...result,
-    [Op.and]: _tempAND,
-    [Op.or]: _tempOR,
-  };
+  if (_tempAND.length) result = { ...result, [Op.and]: _tempAND };
+  if (_tempOR.length) result = { ...result, [Op.or]: _tempOR };
 
   return result;
 };
