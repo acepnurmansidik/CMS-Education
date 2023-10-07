@@ -171,4 +171,36 @@ globalFunc.QuerySearch = async (payload) => {
   return result;
 };
 
+/**
+ * -----------------------------------------------
+ * | DYNAMIC Joins
+ * -----------------------------------------------
+ * | Hey it sounds good and powerfull for
+ * | this function, you don't need to bother
+ * | writing long joins queries
+ * |
+ */
+globalFunc.JoinsRelation = (payload) => {
+  const result = [];
+  for (const everyItem of payload) {
+    const subJoins = [];
+    if (everyItem["include"].length) {
+      // for (const everySubJoin of everyItem["include"]) {
+      //   subJoins.push({
+      //     model: everyItem["model"],
+      //     where: { deletedAt: null },
+      //     include: subJoins,
+      //   });
+      // }
+      subJoins.push(globalFunc.JoinsRelation(everyItem["include"]));
+    }
+    result.push({
+      model: everyItem["model"],
+      where: { deletedAt: null },
+      include: subJoins,
+    });
+  }
+  return result;
+};
+
 module.exports = { globalFunc, verifyJwtToken };
