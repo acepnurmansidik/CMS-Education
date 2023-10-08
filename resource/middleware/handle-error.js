@@ -33,6 +33,9 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     customError.statusCode = 404;
   }
 
+  if (["Validation error"].includes(customError.msg))
+    customError.msg = "Record duplicate!";
+
   response.ErrorResponse(res, customError.statusCode, customError.msg);
 };
 
