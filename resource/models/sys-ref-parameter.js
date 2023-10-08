@@ -2,6 +2,11 @@ const { DataTypes } = require("sequelize");
 const DBConn = require("../../db");
 
 const SysRefParameterModelDefine = {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
   key: {
     type: DataTypes.NUMBER,
     allowNull: false,
@@ -35,9 +40,11 @@ const SysRefParameterModel = DBConn.define(
     createdAt: true,
     updatedAt: true,
     paranoid: true,
+    underscored: true,
   },
 );
 
+delete SysRefParameterModelDefine.id;
 Object.keys(SysRefParameterModelDefine).map((item) => {
   SysRefParameterModelDefine[item] = SysRefParameterModelDefine[item][
     "defaultValue"

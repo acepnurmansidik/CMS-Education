@@ -569,6 +569,88 @@
             "description": ""
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "SYS MENU"
+        ],
+        "summary": "Menu",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/access-role-module/": {
+      "get": {
+        "tags": [
+          "SYS ACCESS ROLE MODULE"
+        ],
+        "summary": "Access Role Module",
+        "description": "every user has role for access",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SYS ACCESS ROLE MODULE"
+        ],
+        "summary": "Access Role Module",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create new role",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BodyAccessRoleModulSchema"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/access-role-module/{id}": {
+      "get": {
+        "tags": [
+          "SYS ACCESS ROLE MODULE"
+        ],
+        "summary": "Access Role Module",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
       }
     }
   },
@@ -638,6 +720,31 @@
           "example": "Laporan"
         },
         "mst_modul_id": {}
+      }
+    },
+    "BodyAccessRoleModulSchema": {
+      "type": "object",
+      "properties": {
+        "role_name": {
+          "type": "string",
+          "example": "string"
+        },
+        "role_access": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "role_id": {
+                "type": "string",
+                "example": "string"
+              },
+              "modul_id": {
+                "type": "string",
+                "example": "string"
+              }
+            }
+          }
+        }
       }
     },
     "NotFound": {

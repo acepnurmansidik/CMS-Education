@@ -3,6 +3,11 @@ const DBConn = require("../../db");
 const { SysMasterModulModel } = require("./sys-mst-modul");
 
 const SysMenuModelDefine = {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
   menu_name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -25,12 +30,14 @@ const SysMenuModel = DBConn.define("sys_menu", SysMenuModelDefine, {
   createdAt: true,
   updatedAt: true,
   paranoid: true,
+  underscored: true,
 });
 
 // Definisikan relasi
 SysMenuModel.belongsTo(SysMasterModulModel, { foreignKey: "mst_modul_id" });
 SysMasterModulModel.hasMany(SysMenuModel, { foreignKey: "mst_modul_id" });
 
+delete SysMenuModelDefine.id;
 Object.keys(SysMenuModelDefine).map((item) => {
   SysMenuModelDefine[item] = SysMenuModelDefine[item]["defaultValue"]
     ? SysMenuModelDefine[item]["defaultValue"]
