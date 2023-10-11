@@ -5,6 +5,7 @@ const MasterModulSchema = require("./sys-mst-modul");
 const MenuSchema = require("./sys-menu");
 const AccessRoleModulSchema = require("./sys-access-roles-moduls");
 const MasterUserModulSchema = require("./sys-mst-user");
+const RefMajorModulSchema = require("./sys-ref-major");
 
 const GlobalSchema = {
   ...UserSchema,
@@ -14,6 +15,7 @@ const GlobalSchema = {
   ...MenuSchema,
   ...AccessRoleModulSchema,
   ...MasterUserModulSchema,
+  ...RefMajorModulSchema
 };
 
 module.exports = GlobalSchema;

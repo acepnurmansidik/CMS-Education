@@ -697,6 +697,144 @@
           }
         }
       }
+    },
+    "/ref-positon/{id}": {
+      "get": {
+        "tags": [
+          "SYS REF MAJOR"
+        ],
+        "summary": "Ref major",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SYS REF MAJOR"
+        ],
+        "summary": "Ref major",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create reference parameter",
+            "schema": {
+              "$ref": "#/definitions/BodyRefMajorSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SYS REF MAJOR"
+        ],
+        "summary": "Ref major",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/ref-positon/": {
+      "get": {
+        "tags": [
+          "SYS REF MAJOR"
+        ],
+        "summary": "Ref major",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "type",
+            "default": "level",
+            "description": "Search by type",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "value",
+            "description": "Search by value",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "default": 10,
+            "description": "Limit data show",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "default": 1,
+            "description": "Page data show",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SYS REF MAJOR"
+        ],
+        "summary": "Ref major",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create reference parameter",
+            "schema": {
+              "$ref": "#/definitions/BodyRefMajorSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -844,6 +982,23 @@
         "marrital_id": {},
         "level_id": {},
         "major_id": {}
+      }
+    },
+    "BodyRefMajorSchema": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "number",
+          "example": 111
+        },
+        "role": {
+          "type": "string",
+          "example": "TKJ"
+        },
+        "role_status": {
+          "type": "boolean",
+          "example": true
+        }
       }
     },
     "NotFound": {
