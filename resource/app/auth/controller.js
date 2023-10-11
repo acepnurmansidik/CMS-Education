@@ -1,18 +1,19 @@
 const { globalFunc } = require("../../helper/global-func");
-const { UserModel } = require("../../models/user");
+const { UserModel } = require("../../models/user-auth");
 const bcrypt = require("bcrypt");
 const { BadRequestError } = require("../../utils/errors/index");
 const { StatusCodes } = require("http-status-codes");
 const response = require("../../utils/response");
 const { methodConstant } = require("../../utils/constanta");
+const { SysMasterUserModel } = require("../../models/sys-mst-user");
 
 const controller = {};
 controller.Register = async (req, res, next) => {
-  /* 
-    #swagger.security = [{
-      "bearerAuth": []
-    }] 
-  */
+  // /* 
+  //   #swagger.security = [{
+  //     "bearerAuth": []
+  //   }] 
+  // */
   /* 
     #swagger.tags = ['Master Role']
     #swagger.summary = 'role user'
@@ -24,10 +25,13 @@ controller.Register = async (req, res, next) => {
     }
   */
   try {
-    const payload = req.body;
-    payload.password = await globalFunc.hashPassword({ ...payload });
-    const result = await UserModel.create(payload);
-    return res.status(200).json({ status: 200, result });
+    const { fullname, date_of_birth, ...payload } = req.body;
+    // save data user to database
+    const mstUser = await SysMasterUserModel.create({ fullname, date_of_birth })
+
+    // payload.password = await globalFunc.hashPassword({ ...payload });
+    // const result = await UserModel.create(payload);
+    return res.status(200).json({ status: 200, mstUser });
   } catch (err) {
     next(err);
   }

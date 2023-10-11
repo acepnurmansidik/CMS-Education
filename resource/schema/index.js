@@ -1,4 +1,4 @@
-const UserSchema = require("./user");
+const UserSchema = require("./user-auth");
 const RefParameterSchema = require("./sys-ref-parameter");
 const MasterRoleSchema = require("./sys-mst-role");
 const MasterModulSchema = require("./sys-mst-modul");

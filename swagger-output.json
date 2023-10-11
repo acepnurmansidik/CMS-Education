@@ -31,11 +31,6 @@
         "description": "every user has role for access",
         "parameters": [
           {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
             "name": "obj",
             "in": "body",
             "description": "Create role",
@@ -48,12 +43,7 @@
           "200": {
             "description": "OK"
           }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/signin": {
@@ -720,7 +710,16 @@
         "password": {
           "type": "string",
           "example": "example secret"
-        }
+        },
+        "fullname": {
+          "type": "string",
+          "example": "Samantha O'Conner"
+        },
+        "date_of_birth": {
+          "type": "string",
+          "example": "1999-01-01"
+        },
+        "gender_id": {}
       }
     },
     "QueryUserSchema": {
@@ -821,7 +820,7 @@
           "type": "string",
           "example": "Florida"
         },
-        "status": {
+        "role_status": {
           "type": "boolean",
           "example": true
         },

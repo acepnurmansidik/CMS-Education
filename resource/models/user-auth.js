@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const DBConn = require("../../db");
+const { SysMasterUserModel } = require("./sys-mst-user");
 
 const UserModelDefine = {
   email: {
@@ -15,6 +16,23 @@ const UserModelDefine = {
     type: DataTypes.STRING,
     allowNull: false,
     defaultValue: "example secret",
+  },
+  otp: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  reset_token: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  mst_user_id: {
+    type: DataTypes.UUID,
+    allowNull: false,
+    defaultValue: "d0c57bd3-6d7e-4240-a369-a4e3f08d6b2e",
+    references: {
+      model: SysMasterUserModel,
+      key: "id",
+    },
   },
 };
 

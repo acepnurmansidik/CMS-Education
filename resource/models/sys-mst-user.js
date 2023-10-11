@@ -24,7 +24,7 @@ const SysMasterUserModelDefine = {
     allowNull: true,
     defaultValue: "Florida",
   },
-  status: {
+  role_status: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: true,

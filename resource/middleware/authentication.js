@@ -1,5 +1,5 @@
 const { verifyJwtToken } = require("../helper/global-func");
-const { UserModel } = require("../models/user");
+const { UserModel } = require("../models/user-auth");
 const { UnauthenticatedError } = require("../utils/errors");
 const NotFound = require("../utils/errors/not-found");
 
