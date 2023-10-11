@@ -92,7 +92,7 @@ controller.FindOne = async (req, res, next) => {
     // find data on database by uuid
     const result = await SysMenuModel.findOne({ where: { id }, include });
     // when data empty send not found
-    if (!result) throw new NotFoundError("Data not found!");
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
     // send success response
     response.MethodResponse(res, methodConstant.GET, result);
   } catch (err) {
@@ -121,7 +121,7 @@ controller.Update = async (req, res, next) => {
     const result = await SysMenuModel.findOne({ where: { id } });
 
     // when data is empty send resposne error not found
-    if (!result) throw new NotFoundError("Data not found");
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
 
     // update to database
     await SysMenuModel.update(payload, { where: { id } });
@@ -148,7 +148,7 @@ controller.Delete = async (req, res, next) => {
     const result = await SysMenuModel.findOne({ where: { id } });
 
     // when data is empty send resposne error not found
-    if (!result) throw new NotFoundError("Data not found");
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
 
     // update to database
     await SysMenuModel.destroy({ where: { id } });

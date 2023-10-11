@@ -92,7 +92,7 @@ controller.FindOne = async (req, res, next) => {
       include,
     });
     // send error data not found
-    if (!result) throw NotFoundError("Data not found!");
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
     // send success response
     response.MethodResponse(res, methodConstant.GET, result);
   } catch (err) {
@@ -121,7 +121,7 @@ controller.Update = async (req, res, next) => {
     const result = await SysMasterModulModel.findOne({ where: { id } });
 
     // send error data not found
-    if (!result) throw NotFoundError("Data not found!");
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
 
     // saving to databse
     await SysMasterModulModel.update(payload, { where: { id } });
@@ -148,7 +148,7 @@ controller.Delete = async (req, res, next) => {
     const result = await SysMasterModulModel.findOne({ where: { id } });
 
     // send error data not found
-    if (!result) throw new NotFoundError("Data not found!");
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
 
     // saving to databse
     await SysMasterModulModel.destroy({ where: { id } });

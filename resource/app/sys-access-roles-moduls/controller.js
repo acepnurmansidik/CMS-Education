@@ -106,7 +106,7 @@ controller.FindOne = async (req, res, next) => {
     const result = await SysAccessRoleModul.findOne({ where: { id }, include });
 
     // when data not found in database send error
-    if (!result) throw new NotFoundError("Data not found!");
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
 
     // send success response
     response.MethodResponse(res, methodConstant.GET, result);

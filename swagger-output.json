@@ -652,6 +652,61 @@
           }
         }
       }
+    },
+    "/user-profile/": {
+      "post": {
+        "tags": [
+          "SYS MASTER USER"
+        ],
+        "summary": "Master User",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create new role",
+            "schema": {
+              "$ref": "#/definitions/BodyMasterUserSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/user-profile/{id}": {
+      "put": {
+        "tags": [
+          "SYS MASTER USER"
+        ],
+        "summary": "Master User",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create new role",
+            "schema": {
+              "$ref": "#/definitions/BodyMasterUserSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -725,6 +780,10 @@
     "BodyAccessRoleModulSchema": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "example": "string"
+        },
         "role_name": {
           "type": "string",
           "example": "string"
@@ -745,6 +804,47 @@
             }
           }
         }
+      }
+    },
+    "BodyMasterUserSchema": {
+      "type": "object",
+      "properties": {
+        "fullname": {
+          "type": "string",
+          "example": "Samantha O'Conner"
+        },
+        "date_of_birth": {
+          "type": "string",
+          "example": "1999-01-01"
+        },
+        "place_of_birth": {
+          "type": "string",
+          "example": "Florida"
+        },
+        "status": {
+          "type": "boolean",
+          "example": true
+        },
+        "residential_address": {
+          "type": "string",
+          "example": "Florida, USA"
+        },
+        "phone_number": {
+          "type": "string",
+          "example": "081977661100"
+        },
+        "unique_number": {},
+        "npwp_number": {},
+        "no_identity": {},
+        "file_url_id": {},
+        "gender_id": {
+          "type": "string",
+          "example": "d0c57bd3-6d7e-4240-a369-a4e3f08d6b2e"
+        },
+        "religion_id": {},
+        "marrital_id": {},
+        "level_id": {},
+        "major_id": {}
       }
     },
     "NotFound": {
