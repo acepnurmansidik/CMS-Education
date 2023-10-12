@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const { UnauthenticatedError } = require("../utils/errors");
 const { Op } = require("sequelize");
 const { compaOpr } = require("../utils/constanta");
+const fs = require("fs");
 
 const transporter = nodemailer.createTransport({
   host: ENV.emailHost,
@@ -32,7 +33,7 @@ const globalFunc = {};
 globalFunc.sendEmail = async ({ template, payload, receive, subject }) => {
   // Get template email from html file
   const tempFile = fs.readFileSync(
-    `resource/app/templates/html/${template}.html`,
+    `/resource/app/templates/html/${template}.html`,
     "utf-8",
   );
 

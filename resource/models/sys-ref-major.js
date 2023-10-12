@@ -15,7 +15,7 @@ const SysRefMajorModelDefine = {
   role: {
     type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: "TKJ",
+    defaultValue: "Teknik Komputer Jaringan",
   },
   role_status: {
     type: DataTypes.BOOLEAN,

@@ -2,6 +2,8 @@ const { DataTypes } = require("sequelize");
 const DBConn = require("../../db");
 const { SysFileUploadModel } = require("./sys-file-upload");
 const { SysRefParameterModel } = require("./sys-ref-parameter");
+const { SysRefMajorModel } = require("./sys-ref-major");
+const { UserModel } = require("./user-auth");
 
 const SysMasterUserModelDefine = {
   id: {
@@ -40,7 +42,7 @@ const SysMasterUserModelDefine = {
     defaultValue: "081977661100",
   },
   unique_number: {
-    type: DataTypes.STRING,
+    type: DataTypes.BIGINT,
     allowNull: true,
   },
   npwp_number: {
@@ -96,7 +98,7 @@ const SysMasterUserModelDefine = {
     type: DataTypes.UUID,
     allowNull: true,
     references: {
-      model: SysRefParameterModel,
+      model: SysRefMajorModel,
       key: "id",
     },
   },
@@ -121,7 +123,7 @@ SysMasterUserModel.belongsTo(SysFileUploadModel, { foreignKey: "gender_id" });
 SysMasterUserModel.belongsTo(SysFileUploadModel, { foreignKey: "religion_id" });
 SysMasterUserModel.belongsTo(SysFileUploadModel, { foreignKey: "marrital_id" });
 SysMasterUserModel.belongsTo(SysFileUploadModel, { foreignKey: "level_id" });
-SysMasterUserModel.belongsTo(SysFileUploadModel, { foreignKey: "major_id" });
+SysMasterUserModel.belongsTo(SysRefMajorModel, { foreignKey: "major_id" });
 
 delete SysMasterUserModelDefine.id;
 Object.keys(SysMasterUserModelDefine).map((item) => {

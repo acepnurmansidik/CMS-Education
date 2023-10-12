@@ -17,18 +17,22 @@ const UserModelDefine = {
     allowNull: false,
     defaultValue: "example secret",
   },
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: "John Doe",
+  },
   otp: {
     type: DataTypes.STRING,
     allowNull: false,
   },
   reset_token: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   mst_user_id: {
     type: DataTypes.UUID,
-    allowNull: false,
-    defaultValue: "d0c57bd3-6d7e-4240-a369-a4e3f08d6b2e",
+    allowNull: true,
     references: {
       model: SysMasterUserModel,
       key: "id",
@@ -36,14 +40,19 @@ const UserModelDefine = {
   },
 };
 
-const UserModel = DBConn.define("user", UserModelDefine, {
+const UserModel = DBConn.define("sys_auth_users", UserModelDefine, {
   timestamps: true,
   schema: "setting",
   force: false,
   createdAt: true,
   updatedAt: true,
   paranoid: true,
+  underscored: true,
 });
+
+// Definisikan relasi
+UserModel.belongsTo(SysMasterUserModel, { foreignKey: "mst_user_id" });
+SysMasterUserModel.hasOne(UserModel, { foreignKey: "mst_user_id" });
 
 Object.keys(UserModelDefine).map((item) => {
   UserModelDefine[item] = UserModelDefine[item]["defaultValue"]
