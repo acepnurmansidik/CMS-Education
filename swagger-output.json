@@ -31,7 +31,7 @@
         "description": "every user has role for access",
         "parameters": [
           {
-            "name": "obj",
+            "name": "register",
             "in": "body",
             "description": "Create role",
             "schema": {
@@ -40,8 +40,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -55,17 +55,41 @@
         "description": "every user has role for access",
         "parameters": [
           {
-            "name": "obj",
+            "name": "login",
             "in": "body",
             "description": "Create role",
             "schema": {
-              "$ref": "#/definitions/BodyUserSchema"
+              "$ref": "#/definitions/BodyUserLoginSchema"
             }
           }
         ],
         "responses": {
           "default": {
             "description": ""
+          }
+        }
+      }
+    },
+    "/verify-account": {
+      "put": {
+        "tags": [
+          "Master Role"
+        ],
+        "summary": "role user",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "active",
+            "in": "body",
+            "description": "Create role",
+            "schema": {
+              "$ref": "#/definitions/BodyActivationUserSchema"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
           }
         }
       }
@@ -860,6 +884,32 @@
         "gender_id": {}
       }
     },
+    "BodyUserLoginSchema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "example@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "example secret"
+        }
+      }
+    },
+    "BodyActivationUserSchema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "example@gmail.com"
+        },
+        "otp": {
+          "type": "string",
+          "example": "462354"
+        }
+      }
+    },
     "QueryUserSchema": {
       "type": "object",
       "properties": {
@@ -993,7 +1043,7 @@
         },
         "role": {
           "type": "string",
-          "example": "TKJ"
+          "example": "Teknik Komputer Jaringan"
         },
         "role_status": {
           "type": "boolean",

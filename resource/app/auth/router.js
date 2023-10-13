@@ -12,5 +12,6 @@ const router = express.Router();
  */
 router.post("/singup", controller.Register);
 router.post("/signin", controller.Login);
+router.put("/verify-account", controller.Activation);
 
 module.exports = router;

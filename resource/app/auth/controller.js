@@ -7,19 +7,16 @@ const { methodConstant } = require("../../utils/constanta");
 const { SysMasterUserModel } = require("../../models/sys-mst-user");
 const service = require("./service");
 const DBConn = require("../../../db");
+const { DateTime } = require("luxon");
+const { timeZone } = require("../../utils/config");
 
 const controller = {};
 controller.Register = async (req, res, next) => {
-  // /*
-  //   #swagger.security = [{
-  //     "bearerAuth": []
-  //   }]
-  // */
   /* 
     #swagger.tags = ['Master Role']
     #swagger.summary = 'role user'
     #swagger.description = 'every user has role for access'
-    #swagger.parameters['obj'] = {
+    #swagger.parameters['register'] = {
       in: 'body',
       description: 'Create role',
       schema: { $ref: '#/definitions/BodyUserSchema' }
@@ -39,6 +36,7 @@ controller.Register = async (req, res, next) => {
           date_of_birth,
           unique_number,
           gender_id,
+          otp_expired: DateTime.now().plus({ minute: 10 }).setZone(timeZone),
         },
         { transaction: trx },
       );
@@ -77,9 +75,7 @@ controller.Register = async (req, res, next) => {
       );
     });
 
-    // payload.password = await globalFunc.hashPassword({ ...payload });
-    // const result = await UserModel.create(payload);
-    return res.status(200).json({ status: 200, mstUser: "" });
+    response.MethodResponse(res, methodConstant.POST, null);
   } catch (err) {
     next(err);
   }
@@ -90,10 +86,10 @@ controller.Login = async (req, res, next) => {
     #swagger.tags = ['Master Role']
     #swagger.summary = 'role user'
     #swagger.description = 'every user has role for access'
-    #swagger.parameters['obj'] = {
+    #swagger.parameters['login'] = {
       in: 'body',
       description: 'Create role',
-      schema: { $ref: '#/definitions/BodyUserSchema' }
+      schema: { $ref: '#/definitions/BodyUserLoginSchema' }
     }
   */
   try {
@@ -105,6 +101,7 @@ controller.Login = async (req, res, next) => {
     const data = await UserModel.findOne({
       where: { email },
       attributes: ["password", "email"],
+      raw: true,
     });
 
     // compare password from input with saving database
@@ -115,10 +112,62 @@ controller.Login = async (req, res, next) => {
     // send error password no match
     if (!isMatch) throw new BadRequestError("Credentials is invalid");
 
+    // send error message account not active
+    if (!data.active)
+      throw new BadRequestError(
+        "Account not active, please check your email inbox!",
+      );
+
+    // send error password no match
+    if (!data.active)
+      throw new BadRequestError("Your account has not been activated!");
+
     // create JWT token for response
     const result = await globalFunc.generateJwtToken(data.toJSON());
 
     response.MethodResponse(res, methodConstant.GET, result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+controller.Activation = async (req, res, next) => {
+  /* 
+    #swagger.tags = ['Master Role']
+    #swagger.summary = 'role user'
+    #swagger.description = 'every user has role for access'
+    #swagger.parameters['active'] = {
+      in: 'body',
+      description: 'Create role',
+      schema: { $ref: '#/definitions/BodyActivationUserSchema' }
+    }
+  */
+  try {
+    // get email and otp number from body
+    const { email, otp } = req.body;
+    // search data on databse
+    const result = await UserModel.findOne({ where: { email }, raw: true });
+
+    // check OTP number expired date
+    if (DateTime.local(result.otp_expired).setZone(timeZone).diffNow().isValid)
+      throw new BadRequestError("OTP number has expired!");
+
+    if (result.active)
+      // when account ha active send error message
+      throw new BadRequestError("Your account is active!");
+
+    // compare otp code, send error message when otp number not same
+    if (result.otp != otp)
+      throw new BadRequestError("Wrong OTP number, please check your email");
+
+    // active account
+    // await UserModel.update({ active: true }, { where: { id: result.id } });
+    return res.status(201).json({
+      code: 201,
+      status: true,
+      message: "Account has active",
+      data: null,
+    });
   } catch (err) {
     next(err);
   }

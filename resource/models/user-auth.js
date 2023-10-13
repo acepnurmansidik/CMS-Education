@@ -17,6 +17,11 @@ const UserModelDefine = {
     allowNull: false,
     defaultValue: "example secret",
   },
+  active: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },
   username: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -25,6 +30,11 @@ const UserModelDefine = {
   otp: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  otp_expired: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: Date.now(),
   },
   reset_token: {
     type: DataTypes.STRING,
