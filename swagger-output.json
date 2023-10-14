@@ -25,7 +25,7 @@
     "/singup": {
       "post": {
         "tags": [
-          "Master Role"
+          "Auth"
         ],
         "summary": "role user",
         "description": "every user has role for access",
@@ -49,7 +49,7 @@
     "/signin": {
       "post": {
         "tags": [
-          "Master Role"
+          "Auth"
         ],
         "summary": "role user",
         "description": "every user has role for access",
@@ -73,7 +73,7 @@
     "/verify-account": {
       "put": {
         "tags": [
-          "Master Role"
+          "Auth"
         ],
         "summary": "role user",
         "description": "every user has role for access",
@@ -97,7 +97,7 @@
     "/send-otp": {
       "post": {
         "tags": [
-          "Master Role"
+          "Auth"
         ],
         "summary": "role user",
         "description": "every user has role for access",
@@ -121,7 +121,7 @@
     "/recovery-password": {
       "put": {
         "tags": [
-          "Master Role"
+          "Auth"
         ],
         "summary": "role user",
         "description": "every user has role for access",

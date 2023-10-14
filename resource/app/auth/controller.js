@@ -13,7 +13,7 @@ const { timeZone } = require("../../utils/config");
 const controller = {};
 controller.Register = async (req, res, next) => {
   /* 
-    #swagger.tags = ['Master Role']
+    #swagger.tags = ['Auth']
     #swagger.summary = 'role user'
     #swagger.description = 'every user has role for access'
     #swagger.parameters['register'] = {
@@ -83,7 +83,7 @@ controller.Register = async (req, res, next) => {
 
 controller.Login = async (req, res, next) => {
   /* 
-    #swagger.tags = ['Master Role']
+    #swagger.tags = ['Auth']
     #swagger.summary = 'role user'
     #swagger.description = 'every user has role for access'
     #swagger.parameters['login'] = {
@@ -124,7 +124,7 @@ controller.Login = async (req, res, next) => {
 
 controller.Activation = async (req, res, next) => {
   /* 
-    #swagger.tags = ['Master Role']
+    #swagger.tags = ['Auth']
     #swagger.summary = 'role user'
     #swagger.description = 'every user has role for access'
     #swagger.parameters['active'] = {
@@ -166,7 +166,7 @@ controller.Activation = async (req, res, next) => {
 
 controller.SendOTPActivation = async (req, res, next) => {
   /* 
-    #swagger.tags = ['Master Role']
+    #swagger.tags = ['Auth']
     #swagger.summary = 'role user'
     #swagger.description = 'every user has role for access'
     #swagger.parameters['active'] = {
@@ -213,7 +213,7 @@ controller.SendOTPActivation = async (req, res, next) => {
 
 controller.ForgotPassword = async (req, res, next) => {
   /* 
-    #swagger.tags = ['Master Role']
+    #swagger.tags = ['Auth']
     #swagger.summary = 'role user'
     #swagger.description = 'every user has role for access'
     #swagger.parameters['active'] = {
