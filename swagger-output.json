@@ -94,6 +94,54 @@
         }
       }
     },
+    "/send-otp": {
+      "post": {
+        "tags": [
+          "Master Role"
+        ],
+        "summary": "role user",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "active",
+            "in": "body",
+            "description": "Create role",
+            "schema": {
+              "$ref": "#/definitions/BodySendOTPActivationUserSchema"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/recovery-password": {
+      "put": {
+        "tags": [
+          "Master Role"
+        ],
+        "summary": "role user",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "active",
+            "in": "body",
+            "description": "Create role",
+            "schema": {
+              "$ref": "#/definitions/BodyRecoveryPasswordUserSchema"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
     "/ref-param/{id}": {
       "get": {
         "tags": [
@@ -907,6 +955,36 @@
         "otp": {
           "type": "string",
           "example": "462354"
+        }
+      }
+    },
+    "BodySendOTPActivationUserSchema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "example@gmail.com"
+        }
+      }
+    },
+    "BodyRecoveryPasswordUserSchema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "example@gmail.com"
+        },
+        "otp": {
+          "type": "string",
+          "example": "462354"
+        },
+        "password": {
+          "type": "string",
+          "example": "example secret"
+        },
+        "confirmPassword": {
+          "type": "string",
+          "example": "example secret"
         }
       }
     },

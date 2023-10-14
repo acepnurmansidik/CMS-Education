@@ -100,30 +100,21 @@ controller.Login = async (req, res, next) => {
     // get data from databse by email
     const data = await UserModel.findOne({
       where: { email },
-      attributes: ["password", "email"],
+      attributes: ["password", "email", "active"],
       raw: true,
     });
 
     // compare password from input with saving database
-    const isMatch = await globalFunc.verifyPassword({
-      hashPassword: data.password,
-      password,
-    });
+    const isMatch = await bcrypt.compare(password, data.password);
     // send error password no match
     if (!isMatch) throw new BadRequestError("Credentials is invalid");
-
-    // send error message account not active
-    if (!data.active)
-      throw new BadRequestError(
-        "Account not active, please check your email inbox!",
-      );
 
     // send error password no match
     if (!data.active)
       throw new BadRequestError("Your account has not been activated!");
 
     // create JWT token for response
-    const result = await globalFunc.generateJwtToken(data.toJSON());
+    const result = await globalFunc.generateJwtToken(data);
 
     response.MethodResponse(res, methodConstant.GET, result);
   } catch (err) {
@@ -166,6 +157,101 @@ controller.Activation = async (req, res, next) => {
       code: 201,
       status: true,
       message: "Account has active",
+      data: null,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+controller.SendOTPActivation = async (req, res, next) => {
+  /* 
+    #swagger.tags = ['Master Role']
+    #swagger.summary = 'role user'
+    #swagger.description = 'every user has role for access'
+    #swagger.parameters['active'] = {
+      in: 'body',
+      description: 'Create role',
+      schema: { $ref: '#/definitions/BodySendOTPActivationUserSchema' }
+    }
+  */
+  try {
+    // get email and otp number from body
+    const { email } = req.body;
+    // search data on databse
+    const result = await UserModel.findOne({ where: { email }, raw: true });
+
+    // create OTP Number
+    const OTPNumber = String(Math.random() * 1000000).split(".")[0];
+
+    // // send OTP number to EMAIL
+    // await globalFunc.sendEmail({
+    //   template: "OTP",
+    //   payload: OTPNumber,
+    //   receive: "acepnurmansidik@gmail.com",
+    //   subject: "Activate account",
+    // });
+
+    // send otp activation again
+    await UserModel.update(
+      {
+        otp: OTPNumber,
+        otp_expired: DateTime.now().plus({ minute: 10 }).setZone(timeZone),
+      },
+      { where: { id: result.id } },
+    );
+    return res.status(201).json({
+      code: 201,
+      status: true,
+      message: "OTP activation has been send your email!",
+      data: null,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+controller.ForgotPassword = async (req, res, next) => {
+  /* 
+    #swagger.tags = ['Master Role']
+    #swagger.summary = 'role user'
+    #swagger.description = 'every user has role for access'
+    #swagger.parameters['active'] = {
+      in: 'body',
+      description: 'Create role',
+      schema: { $ref: '#/definitions/BodyRecoveryPasswordUserSchema' }
+    }
+  */
+  try {
+    // get email and otp number from body
+    let { email, otp, password, confirmPassword } = req.body;
+    // search data on databse
+    const result = await UserModel.findOne({ where: { email }, raw: true });
+
+    // compare otp code, send error message when otp number not same
+    if (result.otp != otp)
+      throw new BadRequestError("Wrong OTP number, please check your email");
+
+    // check password no match
+    if (password != confirmPassword)
+      throw new BadRequestError(
+        "The password you entered is different from the previous one!",
+      );
+
+    // hasing password
+    password = await bcrypt.hash(password, 12);
+
+    // update to database
+    await UserModel.update(
+      {
+        password,
+      },
+      { where: { id: result.id } },
+    );
+    return res.status(201).json({
+      code: 201,
+      status: true,
+      message: "Successfuly change password!",
       data: null,
     });
   } catch (err) {

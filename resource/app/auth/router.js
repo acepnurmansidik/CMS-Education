@@ -13,5 +13,7 @@ const router = express.Router();
 router.post("/singup", controller.Register);
 router.post("/signin", controller.Login);
 router.put("/verify-account", controller.Activation);
+router.post("/send-otp", controller.SendOTPActivation);
+router.put("/recovery-password", controller.ForgotPassword);
 
 module.exports = router;

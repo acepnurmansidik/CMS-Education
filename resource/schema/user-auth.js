@@ -16,6 +16,15 @@ const UserSchema = {
     email: UserModelDefine.email,
     otp: "462354",
   },
+  BodySendOTPActivationUserSchema: {
+    email: UserModelDefine.email,
+  },
+  BodyRecoveryPasswordUserSchema: {
+    email: UserModelDefine.email,
+    otp: "462354",
+    password: UserModelDefine.password,
+    confirmPassword: UserModelDefine.password,
+  },
   QueryUserSchema: {
     email: UserModelDefine.email,
   },
