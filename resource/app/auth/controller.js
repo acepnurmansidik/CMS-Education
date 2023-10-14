@@ -228,6 +228,10 @@ controller.ForgotPassword = async (req, res, next) => {
     // search data on databse
     const result = await UserModel.findOne({ where: { email }, raw: true });
 
+    // check OTP number expired date
+    if (DateTime.local(result.otp_expired).setZone(timeZone).diffNow().isValid)
+      throw new BadRequestError("OTP number has expired!");
+
     // compare otp code, send error message when otp number not same
     if (result.otp != otp)
       throw new BadRequestError("Wrong OTP number, please check your email");
