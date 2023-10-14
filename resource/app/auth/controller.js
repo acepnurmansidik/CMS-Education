@@ -5,10 +5,15 @@ const { BadRequestError } = require("../../utils/errors/index");
 const response = require("../../utils/response");
 const { methodConstant } = require("../../utils/constanta");
 const { SysMasterUserModel } = require("../../models/sys-mst-user");
+const { SysUserRolesModul } = require("../../models/sys-user-roles");
 const service = require("./service");
 const DBConn = require("../../../db");
 const { DateTime } = require("luxon");
 const { timeZone } = require("../../utils/config");
+const { SysMasterRoleModel } = require("../../models/sys-mst-role");
+const { SysAccessRoleModul } = require("../../models/sys-access-roles-moduls");
+const { Op } = require("sequelize");
+const { SysMasterModulModel } = require("../../models/sys-mst-modul");
 
 const controller = {};
 controller.Register = async (req, res, next) => {
@@ -100,9 +105,20 @@ controller.Login = async (req, res, next) => {
     // get data from databse by email
     const data = await UserModel.findOne({
       where: { email },
-      attributes: ["password", "email", "active"],
-      raw: true,
+      attributes: ["password", "email", "active", "mst_user_id"],
+      include: {
+        model: SysMasterUserModel,
+        attributes: ["fullname", "role_status", "unique_number"],
+        raw: true,
+      },
     });
+
+    let payload = { profile: { ...data.dataValues } };
+    delete payload.profile.sys_mst_user;
+    payload.profile = {
+      ...payload.profile,
+      ...data.dataValues.sys_mst_user.dataValues,
+    };
 
     // compare password from input with saving database
     const isMatch = await bcrypt.compare(password, data.password);
@@ -113,8 +129,60 @@ controller.Login = async (req, res, next) => {
     if (!data.active)
       throw new BadRequestError("Your account has not been activated!");
 
+    // get use role
+    const roles = await SysUserRolesModul.findAll({
+      where: { user_id: data.dataValues.mst_user_id },
+      attributes: ["role_id"],
+      include: {
+        model: SysMasterRoleModel,
+        attributes: ["role_name"],
+      },
+      raw: true,
+    });
+
+    const _tempRoleID = [];
+    const _tempRole = [];
+    for (const everyRole of roles) {
+      _tempRoleID.push(everyRole.role_id);
+      _tempRole.push({
+        id: everyRole.role_id,
+        role_name: everyRole["sys_mst_role.role_name"],
+      });
+    }
+
+    const moduls = await SysAccessRoleModul.findAll({
+      where: {
+        role_id: {
+          [Op.in]: _tempRoleID,
+        },
+      },
+      include: [
+        {
+          model: SysMasterModulModel,
+          attributes: ["modul_name"],
+        },
+        {
+          model: SysMasterRoleModel,
+          attributes: ["role_name"],
+        },
+      ],
+    });
+
+    const _tempModul = [];
+    for (const everyModul of moduls) {
+      _tempModul.push({
+        role_id: everyModul.role_id,
+        role_name: everyModul.dataValues.sys_mst_role.dataValues.role_name,
+        modul_id: everyModul.modul_id,
+        modul_name: everyModul.dataValues.sys_mst_modul.dataValues.modul_name,
+      });
+    }
+
+    payload.role_access = _tempRole;
+    payload.modul_access = _tempModul;
+
     // create JWT token for response
-    const result = await globalFunc.generateJwtToken(data);
+    const result = await globalFunc.generateJwtToken(payload);
 
     response.MethodResponse(res, methodConstant.GET, result);
   } catch (err) {
