@@ -3,7 +3,6 @@ const DBConn = require("../../db");
 const { SysFileUploadModel } = require("./sys-file-upload");
 const { SysRefParameterModel } = require("./sys-ref-parameter");
 const { SysRefMajorModel } = require("./sys-ref-major");
-const { UserModel } = require("./user-auth");
 
 const SysMasterUserModelDefine = {
   id: {

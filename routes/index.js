@@ -8,6 +8,7 @@ const menuRouter = require("../resource/app/sys-menu/router");
 const AccessRoleModuleRouter = require("../resource/app/sys-access-roles-moduls/router");
 const MasterUserModuleRouter = require("../resource/app/sys-mst-user/router");
 const RefMajorModuleRouter = require("../resource/app/sys-ref-major/router");
+const UserRolesRouter = require("../resource/app/sys-user-role/router");
 
 router.use(`/`, userRouter);
 router.use(`/ref-param`, refParamRouter);
@@ -17,5 +18,6 @@ router.use(`/menu`, menuRouter);
 router.use(`/access-role-module`, AccessRoleModuleRouter);
 router.use(`/user-profile`, MasterUserModuleRouter);
 router.use(`/ref-positon`, RefMajorModuleRouter);
+router.use(`/user-access`, UserRolesRouter);
 
 module.exports = router;

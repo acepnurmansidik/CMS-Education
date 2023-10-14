@@ -1,7 +1,3 @@
-const {
-  SysAccessRoleModulDefine,
-} = require("../models/sys-access-roles-moduls");
-
 const AccessRoleModulSchema = {
   BodyAccessRoleModulSchema: {
     id: "string",

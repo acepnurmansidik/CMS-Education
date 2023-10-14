@@ -907,6 +907,64 @@
           }
         }
       }
+    },
+    "/user-access/": {
+      "get": {
+        "tags": [
+          "SYS USER ROLES"
+        ],
+        "summary": "Access User Role",
+        "description": "every user has role for access",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "SYS USER ROLES"
+        ],
+        "summary": "Access User Role",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create new role",
+            "schema": {
+              "$ref": "#/definitions/BodyUserRolesModulSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/user-access/{id}": {
+      "get": {
+        "tags": [
+          "SYS USER ROLES"
+        ],
+        "summary": "Access User Role",
+        "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1126,6 +1184,31 @@
         "role_status": {
           "type": "boolean",
           "example": true
+        }
+      }
+    },
+    "BodyUserRolesModulSchema": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "example": "string"
+        },
+        "role_access": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "role_id": {
+                "type": "string",
+                "example": "string"
+              },
+              "user_id": {
+                "type": "string",
+                "example": "string"
+              }
+            }
+          }
         }
       }
     },
