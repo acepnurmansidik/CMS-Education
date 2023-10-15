@@ -1096,6 +1096,155 @@
           }
         }
       }
+    },
+    "/room-building/": {
+      "get": {
+        "tags": [
+          "LRN ROOM BUILDING"
+        ],
+        "summary": "Room Building",
+        "description": "every school have buildings",
+        "parameters": [
+          {
+            "name": "room_name",
+            "description": "Search by room_name",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "room_code",
+            "description": "Search by room_code",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "floor",
+            "description": "Search by floor",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "school_building_id",
+            "description": "Search by school_building_id",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "default": 10,
+            "description": "Limit data show",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "default": 1,
+            "description": "Page data show",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "LRN ROOM BUILDING"
+        ],
+        "summary": "Room Building",
+        "description": "every school have buildings",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create new room number",
+            "schema": {
+              "$ref": "#/definitions/BodyFloorBuildingSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/room-building/{id}": {
+      "get": {
+        "tags": [
+          "LRN ROOM BUILDING"
+        ],
+        "summary": "Room Building",
+        "description": "every school have buildings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LRN ROOM BUILDING"
+        ],
+        "summary": "Room Building",
+        "description": "every school have buildings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create new room number",
+            "schema": {
+              "$ref": "#/definitions/BodyFloorBuildingSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LRN ROOM BUILDING"
+        ],
+        "summary": "Room Building",
+        "description": "every school have buildings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1350,6 +1499,21 @@
           "type": "string",
           "example": "Gedung 1"
         }
+      }
+    },
+    "BodyFloorBuildingSchema": {
+      "type": "object",
+      "properties": {
+        "floor": {
+          "type": "number",
+          "example": 1
+        },
+        "room_name": {
+          "type": "string",
+          "example": "Lab Matematika"
+        },
+        "room_code": {},
+        "school_building_id": {}
       }
     },
     "NotFound": {

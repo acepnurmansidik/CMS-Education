@@ -10,6 +10,7 @@ const MasterUserModuleRouter = require("../resource/app/sys-mst-user/router");
 const RefMajorModuleRouter = require("../resource/app/sys-ref-major/router");
 const UserRolesRouter = require("../resource/app/sys-user-role/router");
 const SchooldBuildingsRouter = require("../resource/app/lrn-school-building/router");
+const FloordBuildingsRouter = require("../resource/app/lrn-floor-building/router");
 
 router.use(`/`, userRouter);
 router.use(`/ref-param`, refParamRouter);
@@ -21,5 +22,6 @@ router.use(`/user-profile`, MasterUserModuleRouter);
 router.use(`/ref-positon`, RefMajorModuleRouter);
 router.use(`/user-access`, UserRolesRouter);
 router.use(`/building`, SchooldBuildingsRouter);
+router.use(`/room-building`, FloordBuildingsRouter);
 
 module.exports = router;
