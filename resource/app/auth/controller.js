@@ -171,13 +171,10 @@ controller.Login = async (req, res, next) => {
     const _tempModul = [];
     for (const everyModul of moduls) {
       _tempModul.push({
-        role_id: everyModul.role_id,
-        role_name: everyModul.dataValues.sys_mst_role.dataValues.role_name,
         modul_id: everyModul.modul_id,
         modul_name: everyModul.dataValues.sys_mst_modul.dataValues.modul_name,
       });
     }
-
     payload.role_access = _tempRole;
     payload.modul_access = _tempModul;
 
