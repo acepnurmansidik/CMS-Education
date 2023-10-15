@@ -965,6 +965,137 @@
           }
         }
       }
+    },
+    "/building/": {
+      "get": {
+        "tags": [
+          "LRN SCHOOL BUILDING"
+        ],
+        "summary": "School Building",
+        "description": "every school have buildings",
+        "parameters": [
+          {
+            "name": "building_name",
+            "description": "Search by building_name",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "default": 10,
+            "description": "Limit data show",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "default": 1,
+            "description": "Page data show",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "LRN SCHOOL BUILDING"
+        ],
+        "summary": "School Building",
+        "description": "every school have buildings",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create new role",
+            "schema": {
+              "$ref": "#/definitions/BodySchoolBuildingSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/building/{id}": {
+      "get": {
+        "tags": [
+          "LRN SCHOOL BUILDING"
+        ],
+        "summary": "School Building",
+        "description": "every school have buildings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LRN SCHOOL BUILDING"
+        ],
+        "summary": "School Building",
+        "description": "every school have buildings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create new building name",
+            "schema": {
+              "$ref": "#/definitions/BodySchoolBuildingSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LRN SCHOOL BUILDING"
+        ],
+        "summary": "School Building",
+        "description": "every school have buildings",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1209,6 +1340,15 @@
               }
             }
           }
+        }
+      }
+    },
+    "BodySchoolBuildingSchema": {
+      "type": "object",
+      "properties": {
+        "building_name": {
+          "type": "string",
+          "example": "Gedung 1"
         }
       }
     },

@@ -7,6 +7,7 @@ const AccessRoleModulSchema = require("./sys-access-roles-moduls");
 const MasterUserModulSchema = require("./sys-mst-user");
 const RefMajorModulSchema = require("./sys-ref-major");
 const UserRolesModulSchema = require("./sys-user-roles");
+const SchoolBuildingSchema = require("./lrn-school-building");
 
 const GlobalSchema = {
   ...UserSchema,
@@ -18,6 +19,7 @@ const GlobalSchema = {
   ...MasterUserModulSchema,
   ...RefMajorModulSchema,
   ...UserRolesModulSchema,
+  ...SchoolBuildingSchema,
 };
 
 module.exports = GlobalSchema;
