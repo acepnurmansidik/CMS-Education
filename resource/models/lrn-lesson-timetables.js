@@ -105,12 +105,15 @@ SysMasterUserModel.hasMany(LrnLessonTimetableModel, {
 
 LrnLessonTimetableModel.belongsTo(SysRefParameterModel, {
   foreignKey: "lesson_id",
+  as: "lesson",
 });
 LrnLessonTimetableModel.belongsTo(SysRefParameterModel, {
   foreignKey: "level_id",
+  as: "level",
 });
 LrnLessonTimetableModel.belongsTo(SysRefParameterModel, {
   foreignKey: "day_id",
+  as: "day",
 });
 
 LrnLessonTimetableModel.belongsTo(LrnFloorBuildingModel, {

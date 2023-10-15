@@ -24,6 +24,6 @@ router.use(`/ref-positon`, RefMajorModuleRouter);
 router.use(`/user-access`, UserRolesRouter);
 router.use(`/building`, SchooldBuildingsRouter);
 router.use(`/room-building`, FloordBuildingsRouter);
-router.use(`/student-schedule`, LessonTimetableRouter);
+router.use(`/lesson-timetable`, LessonTimetableRouter);
 
 module.exports = router;

@@ -1,6 +1,8 @@
 const {
   LrnLessonTimetableModel,
 } = require("../../models/lrn-lesson-timetables");
+const { SysRefMajorModel } = require("../../models/sys-ref-major");
+const { SysRefParameterModel } = require("../../models/sys-ref-parameter");
 const { methodConstant } = require("../../utils/constanta");
 const { NotFoundError } = require("../../utils/errors");
 const response = require("../../utils/response");
@@ -26,6 +28,54 @@ controller.Index = async (req, res, next) => {
     });
     // send success response
     response.GetPaginationResponse(res, result, page, limit);
+  } catch (err) {
+    next(err);
+  }
+};
+
+controller.StudentSchedule = async (req, res, next) => {
+  /* 
+    #swagger.tags = ['LRN LESSON TIMETABLE']
+    #swagger.summary = 'Lesson Timetable Student'
+    #swagger.description = 'management lesson timetable for student'
+    #swagger.parameters['limit'] = { default: 10, description: 'Limit data show' }
+    #swagger.parameters['page'] = { default: 1, description: 'Page data show' }
+  */
+  try {
+    // get filter at req.query
+    const { limit, page, ...query } = req.query;
+    // find data from database with filter condition
+    const result = await LrnLessonTimetableModel.findAll({
+      where: { ...query },
+      group: [
+        "day_id",
+        "major_id",
+        "level_id",
+        "sys_ref_major.id",
+        "sys_ref_major.role",
+        "level.id",
+        "day.id",
+      ],
+      attributes: ["day_id", "major_id", "level_id"],
+      include: [
+        {
+          model: SysRefMajorModel,
+          attributes: ["role"],
+        },
+        {
+          model: SysRefParameterModel,
+          attributes: ["value"],
+          as: "level",
+        },
+        {
+          model: SysRefParameterModel,
+          attributes: ["value"],
+          as: "day",
+        },
+      ],
+    });
+    // send success response
+    response.MethodResponse(res, methodConstant.GET, result);
   } catch (err) {
     next(err);
   }

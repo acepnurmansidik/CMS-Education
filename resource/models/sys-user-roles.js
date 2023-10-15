@@ -33,7 +33,7 @@ const SysUserRolesModul = DBConn.define("sys_users_roles", SysUserRolesDefine, {
   force: false,
   createdAt: true,
   updatedAt: true,
-  paranoid: true,
+  paranoid: false,
   underscored: true,
   indexes: [
     {

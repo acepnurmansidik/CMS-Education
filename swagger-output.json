@@ -1246,7 +1246,7 @@
         }
       }
     },
-    "/student-schedule/": {
+    "/lesson-timetable/": {
       "get": {
         "tags": [
           "LRN LESSON TIMETABLE"
@@ -1298,7 +1298,37 @@
         }
       }
     },
-    "/student-schedule/{id}": {
+    "/lesson-timetable/schedule": {
+      "get": {
+        "tags": [
+          "LRN LESSON TIMETABLE"
+        ],
+        "summary": "Lesson Timetable Student",
+        "description": "management lesson timetable for student",
+        "parameters": [
+          {
+            "name": "limit",
+            "default": 10,
+            "description": "Limit data show",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "default": 1,
+            "description": "Page data show",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/lesson-timetable/{id}": {
       "get": {
         "tags": [
           "LRN LESSON TIMETABLE"
