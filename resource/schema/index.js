@@ -9,6 +9,7 @@ const RefMajorModulSchema = require("./sys-ref-major");
 const UserRolesModulSchema = require("./sys-user-roles");
 const SchoolBuildingSchema = require("./lrn-school-building");
 const FloorBuildingSchema = require("./lrn-floor-building");
+const LessonTimetablesSchema = require("./lrn-lesson-timetables");
 
 const GlobalSchema = {
   ...UserSchema,
@@ -21,7 +22,8 @@ const GlobalSchema = {
   ...RefMajorModulSchema,
   ...UserRolesModulSchema,
   ...SchoolBuildingSchema,
-  ...FloorBuildingSchema
+  ...FloorBuildingSchema,
+  ...LessonTimetablesSchema,
 };
 
 module.exports = GlobalSchema;

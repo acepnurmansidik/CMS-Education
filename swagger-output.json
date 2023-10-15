@@ -1245,6 +1245,131 @@
           }
         }
       }
+    },
+    "/student-schedule/": {
+      "get": {
+        "tags": [
+          "LRN LESSON TIMETABLE"
+        ],
+        "summary": "Lesson Timetable Student",
+        "description": "management lesson timetable for student",
+        "parameters": [
+          {
+            "name": "limit",
+            "default": 10,
+            "description": "Limit data show",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "default": 1,
+            "description": "Page data show",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "LRN LESSON TIMETABLE"
+        ],
+        "summary": "Lesson Timetable Student",
+        "description": "management lesson timetable for student",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create new room number",
+            "schema": {
+              "$ref": "#/definitions/BodyLessonTimetableSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/student-schedule/{id}": {
+      "get": {
+        "tags": [
+          "LRN LESSON TIMETABLE"
+        ],
+        "summary": "Lesson Timetable Student",
+        "description": "management lesson timetable for student",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LRN LESSON TIMETABLE"
+        ],
+        "summary": "Lesson Timetable Student",
+        "description": "management lesson timetable for student",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Create new room number",
+            "schema": {
+              "$ref": "#/definitions/BodyLessonTimetableSchema"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "LRN LESSON TIMETABLE"
+        ],
+        "summary": "Lesson Timetable Student",
+        "description": "management lesson timetable for student",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "get data by id using uuid"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1514,6 +1639,33 @@
         },
         "room_code": {},
         "school_building_id": {}
+      }
+    },
+    "BodyLessonTimetableSchema": {
+      "type": "object",
+      "properties": {
+        "start_class_time": {
+          "type": "string",
+          "example": "07:30:00"
+        },
+        "end_class_time": {
+          "type": "string",
+          "example": "08:30:00"
+        },
+        "status_active": {
+          "type": "boolean",
+          "example": true
+        },
+        "school_year": {
+          "type": "number",
+          "example": 2024
+        },
+        "teacher_id": {},
+        "lesson_id": {},
+        "level_id": {},
+        "day_id": {},
+        "location_id": {},
+        "major_id": {}
       }
     },
     "NotFound": {
