@@ -7,9 +7,9 @@ const AuthorizeUserLogin = async (req, res, next) => {
   try {
     // get JWT token from header
     const authHeader =
-      req.headers.authorization.split(" ")[
-        req.headers.authorization.split(" ").length - 1
-      ];
+    req.headers.authorization.split(" ")[
+      req.headers.authorization.split(" ").length - 1
+    ];
 
     // send error Token not found
     if (!authHeader) throw new UnauthenticatedError("Invalid credentials!");
@@ -19,7 +19,7 @@ const AuthorizeUserLogin = async (req, res, next) => {
 
     // check email is register on database
     const verifyData = await UserModel.findOne({
-      where: { email: dataValid.email },
+      where: { email: dataValid.profile.email },
     });
 
     // send error not found, if data not register
