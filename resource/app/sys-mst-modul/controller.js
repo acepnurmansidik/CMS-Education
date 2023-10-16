@@ -8,6 +8,11 @@ const response = require("../../utils/response");
 const controller = {};
 
 controller.Index = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS MASTER MODUL']
     #swagger.summary = 'Master Modul'
@@ -47,6 +52,11 @@ controller.Index = async (req, res, next) => {
 };
 
 controller.Create = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS MASTER MODUL']
     #swagger.summary = 'Master Modul'
@@ -70,6 +80,11 @@ controller.Create = async (req, res, next) => {
 };
 
 controller.FindOne = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS MASTER MODUL']
     #swagger.summary = 'Master Modul'
@@ -92,7 +107,7 @@ controller.FindOne = async (req, res, next) => {
       include,
     });
     // send error data not found
-    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
     // send success response
     response.MethodResponse(res, methodConstant.GET, result);
   } catch (err) {
@@ -101,6 +116,11 @@ controller.FindOne = async (req, res, next) => {
 };
 
 controller.Update = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS MASTER MODUL']
     #swagger.summary = 'Master Modul'
@@ -121,7 +141,7 @@ controller.Update = async (req, res, next) => {
     const result = await SysMasterModulModel.findOne({ where: { id } });
 
     // send error data not found
-    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
 
     // saving to databse
     await SysMasterModulModel.update(payload, { where: { id } });
@@ -134,6 +154,11 @@ controller.Update = async (req, res, next) => {
 };
 
 controller.Delete = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS MASTER MODUL']
     #swagger.summary = 'Master Modul'
@@ -148,7 +173,7 @@ controller.Delete = async (req, res, next) => {
     const result = await SysMasterModulModel.findOne({ where: { id } });
 
     // send error data not found
-    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
 
     // saving to databse
     await SysMasterModulModel.destroy({ where: { id } });

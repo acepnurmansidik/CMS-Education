@@ -8,6 +8,11 @@ const response = require("../../utils/response");
 const controller = {};
 
 controller.Index = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS USER ROLES']
     #swagger.summary = 'Access User Role'
@@ -38,6 +43,11 @@ controller.Index = async (req, res, next) => {
 };
 
 controller.Create = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS USER ROLES']
     #swagger.summary = 'Access User Role'
@@ -73,6 +83,11 @@ controller.Create = async (req, res, next) => {
 };
 
 controller.FindOne = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS USER ROLES']
     #swagger.summary = 'Access User Role'

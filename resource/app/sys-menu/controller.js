@@ -9,6 +9,11 @@ const { SysMasterModulModel } = require("../../models/sys-mst-modul");
 const controller = {};
 
 controller.Index = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS MENU']
     #swagger.summary = 'Menu'
@@ -50,6 +55,11 @@ controller.Index = async (req, res, next) => {
 };
 
 controller.Create = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS MENU']
     #swagger.summary = 'Menu'
@@ -73,6 +83,11 @@ controller.Create = async (req, res, next) => {
 };
 
 controller.FindOne = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS MENU']
     #swagger.summary = 'Menu'
@@ -92,7 +107,7 @@ controller.FindOne = async (req, res, next) => {
     // find data on database by uuid
     const result = await SysMenuModel.findOne({ where: { id }, include });
     // when data empty send not found
-    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
     // send success response
     response.MethodResponse(res, methodConstant.GET, result);
   } catch (err) {
@@ -101,6 +116,11 @@ controller.FindOne = async (req, res, next) => {
 };
 
 controller.Update = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS MENU']
     #swagger.summary = 'Menu'
@@ -121,7 +141,7 @@ controller.Update = async (req, res, next) => {
     const result = await SysMenuModel.findOne({ where: { id } });
 
     // when data is empty send resposne error not found
-    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
 
     // update to database
     await SysMenuModel.update(payload, { where: { id } });
@@ -134,6 +154,11 @@ controller.Update = async (req, res, next) => {
 };
 
 controller.Delete = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS MENU']
     #swagger.summary = 'Menu'
@@ -148,7 +173,7 @@ controller.Delete = async (req, res, next) => {
     const result = await SysMenuModel.findOne({ where: { id } });
 
     // when data is empty send resposne error not found
-    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
 
     // update to database
     await SysMenuModel.destroy({ where: { id } });

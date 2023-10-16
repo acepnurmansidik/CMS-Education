@@ -6,6 +6,11 @@ const response = require("../../utils/response");
 const controller = {};
 
 controller.Index = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['LRN ROOM BUILDING']
     #swagger.summary = 'Room Building'
@@ -34,6 +39,11 @@ controller.Index = async (req, res, next) => {
 };
 
 controller.Create = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['LRN ROOM BUILDING']
     #swagger.summary = 'Room Building'
@@ -59,6 +69,11 @@ controller.Create = async (req, res, next) => {
 };
 
 controller.FindOne = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['LRN ROOM BUILDING']
     #swagger.summary = 'Room Building'
@@ -83,6 +98,11 @@ controller.FindOne = async (req, res, next) => {
 };
 
 controller.Update = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['LRN ROOM BUILDING']
     #swagger.summary = 'Room Building'
@@ -112,6 +132,11 @@ controller.Update = async (req, res, next) => {
 };
 
 controller.Delete = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['LRN ROOM BUILDING']
     #swagger.summary = 'Room Building'

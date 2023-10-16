@@ -6,6 +6,11 @@ const response = require("../../utils/response");
 const controller = {};
 
 controller.Create = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS MASTER USER']
     #swagger.summary = 'Master User'
@@ -26,6 +31,11 @@ controller.Create = async (req, res, next) => {
 };
 
 controller.Update = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS MASTER USER']
     #swagger.summary = 'Master User'
@@ -39,16 +49,16 @@ controller.Update = async (req, res, next) => {
   */
   try {
     // get id from param and update data from body
-    const id = req.params.id
+    const id = req.params.id;
     const payload = req.body;
     // serach data on database
-    let result = await SysMasterUserModel.findOne({ where: {id} })
+    let result = await SysMasterUserModel.findOne({ where: { id } });
 
     // send error not found when data emtyp
-    if(!result) throw new NotFoundError(`Data with ID ${id} not found!`)
-    
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
+
     // isexist update data
-    result = await SysMasterUserModel.update(payload,{ where: { id } });
+    result = await SysMasterUserModel.update(payload, { where: { id } });
     response.MethodResponse(res, methodConstant.PUT, null);
   } catch (err) {
     next(err);

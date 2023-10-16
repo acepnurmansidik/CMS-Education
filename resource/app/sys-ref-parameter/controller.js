@@ -8,6 +8,11 @@ const { globalFunc } = require("../../helper/global-func");
 const controller = {};
 
 controller.Index = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS REF PARAMETER']
     #swagger.summary = 'Ref parameter'
@@ -39,6 +44,11 @@ controller.Index = async (req, res, next) => {
 };
 
 controller.Create = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS REF PARAMETER']
     #swagger.summary = 'Ref parameter'
@@ -68,6 +78,11 @@ controller.Create = async (req, res, next) => {
 };
 
 controller.FindOne = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS REF PARAMETER']
     #swagger.summary = 'Ref parameter'
@@ -80,7 +95,7 @@ controller.FindOne = async (req, res, next) => {
     // check same type in database
     const result = await SysRefParameterModel.findOne({ where: { id } });
     // send response 404 when data not found
-    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
     // send response
     response.MethodResponse(res, methodConstant.GET, result);
   } catch (err) {
@@ -89,6 +104,11 @@ controller.FindOne = async (req, res, next) => {
 };
 
 controller.Update = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS REF PARAMETER']
     #swagger.summary = 'Ref parameter'
@@ -107,7 +127,7 @@ controller.Update = async (req, res, next) => {
     // check same type in database
     const result = await SysRefParameterModel.findOne({ where: { id } });
     // send response 404 when data not found
-    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
     // update data
     await SysRefParameterModel.update(payload, { where: { id } });
     // send response
@@ -118,6 +138,11 @@ controller.Update = async (req, res, next) => {
 };
 
 controller.Delete = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS REF PARAMETER']
     #swagger.summary = 'Ref parameter'
@@ -130,7 +155,7 @@ controller.Delete = async (req, res, next) => {
     // check same type in database
     let result = await SysRefParameterModel.findOne({ where: { id } });
     // send response 404 when data not found
-    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
     // update data
     await SysRefParameterModel.destroy({ where: { id } });
     // send response

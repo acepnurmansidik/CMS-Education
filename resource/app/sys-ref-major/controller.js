@@ -8,6 +8,11 @@ const { BadRequestError } = require("../../utils/errors");
 const controller = {};
 
 controller.Index = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS REF MAJOR']
     #swagger.summary = 'Ref major'
@@ -39,6 +44,11 @@ controller.Index = async (req, res, next) => {
 };
 
 controller.Create = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS REF MAJOR']
     #swagger.summary = 'Ref major'
@@ -53,9 +63,12 @@ controller.Create = async (req, res, next) => {
     // get data from body payload
     const payload = req.body;
     // check same type in database
-    let result = await SysRefMajorModel.findOne({ where: { code: String(payload.code) } });
+    let result = await SysRefMajorModel.findOne({
+      where: { code: String(payload.code) },
+    });
     // if same increament key +1
-    if(result) throw new BadRequestError(`Code number ${payload.code} can't duplicate!`)
+    if (result)
+      throw new BadRequestError(`Code number ${payload.code} can't duplicate!`);
     // saving to database
     result = await SysRefMajorModel.create(payload);
     // send response
@@ -66,6 +79,11 @@ controller.Create = async (req, res, next) => {
 };
 
 controller.FindOne = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS REF MAJOR']
     #swagger.summary = 'Ref major'
@@ -78,7 +96,7 @@ controller.FindOne = async (req, res, next) => {
     // check same type in database
     const result = await SysRefMajorModel.findOne({ where: { id } });
     // send response 404 when data not found
-    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
     // send response
     response.MethodResponse(res, methodConstant.GET, result);
   } catch (err) {
@@ -87,6 +105,11 @@ controller.FindOne = async (req, res, next) => {
 };
 
 controller.Update = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS REF MAJOR']
     #swagger.summary = 'Ref major'
@@ -105,7 +128,7 @@ controller.Update = async (req, res, next) => {
     // check same type in database
     const result = await SysRefMajorModel.findOne({ where: { id } });
     // send response 404 when data not found
-    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
     // update data
     await SysRefMajorModel.update(payload, { where: { id } });
     // send response
@@ -116,6 +139,11 @@ controller.Update = async (req, res, next) => {
 };
 
 controller.Delete = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['SYS REF MAJOR']
     #swagger.summary = 'Ref major'
@@ -128,7 +156,7 @@ controller.Delete = async (req, res, next) => {
     // check same type in database
     let result = await SysRefMajorModel.findOne({ where: { id } });
     // send response 404 when data not found
-    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`)
+    if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
     // update data
     await SysRefMajorModel.destroy({ where: { id } });
     // send response
