@@ -7,12 +7,13 @@ const AuthorizeUserLogin = async (req, res, next) => {
   try {
     // get JWT token from header
     const authHeader =
-    req.headers.authorization.split(" ")[
-      req.headers.authorization.split(" ").length - 1
-    ];
+      req.headers?.authorization?.split(" ")[
+        req.headers.authorization.split(" ").length - 1
+      ];
 
     // send error Token not found
-    if (!authHeader) throw new UnauthenticatedError("Invalid credentials!");
+    if (!authHeader || !req.headers.authorization)
+      throw new UnauthenticatedError("Invalid credentials!");
 
     // verify JWT token
     const dataValid = await verifyJwtToken(authHeader, next);
