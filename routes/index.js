@@ -12,8 +12,10 @@ const UserRolesRouter = require("../resource/app/sys-user-role/router");
 const SchooldBuildingsRouter = require("../resource/app/lrn-school-building/router");
 const FloordBuildingsRouter = require("../resource/app/lrn-floor-building/router");
 const LessonTimetableRouter = require("../resource/app/lrn-lesson-timetables/router");
+const { AuthorizeUserLogin } = require("../resource/middleware/authentication");
 
 router.use(`/`, userRouter);
+router.use(AuthorizeUserLogin);
 router.use(`/ref-param`, refParamRouter);
 router.use(`/master-role`, masterRoleRouter);
 router.use(`/master-modul`, masterModulRouter);

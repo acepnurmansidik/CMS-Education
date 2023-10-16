@@ -10,10 +10,17 @@ const response = require("../../utils/response");
 const controller = {};
 
 controller.Index = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['LRN LESSON TIMETABLE']
     #swagger.summary = 'Lesson Timetable Student'
     #swagger.description = 'management lesson timetable for student'
+    #swagger.parameters['level_id'] = { description: 'filter by level_id' }
+    #swagger.parameters['major_id'] = { description: 'filter by major_id' }
     #swagger.parameters['limit'] = { default: 10, description: 'Limit data show' }
     #swagger.parameters['page'] = { default: 1, description: 'Page data show' }
   */
@@ -34,19 +41,36 @@ controller.Index = async (req, res, next) => {
 };
 
 controller.StudentSchedule = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['LRN LESSON TIMETABLE']
     #swagger.summary = 'Lesson Timetable Student'
     #swagger.description = 'management lesson timetable for student'
+    #swagger.parameters['level_id'] = { description: 'filter by level_id' }
+    #swagger.parameters['major_id'] = { description: 'filter by major_id' }
     #swagger.parameters['limit'] = { default: 10, description: 'Limit data show' }
     #swagger.parameters['page'] = { default: 1, description: 'Page data show' }
   */
   try {
     // get filter at req.query
     const { limit, page, ...query } = req.query;
+
+    // filter by role login
+    let where = {};
+    let isTeacher = req.login.role_access.findIndex(
+      (item) => item.role_name.toLowerCase() === "teacher",
+    );
+    isTeacher
+      ? (where = { ...where, teacher_id: req.login.profile.mst_user_id })
+      : (where = { ...where, ...query });
+
     // find data from database with filter condition
     const result = await LrnLessonTimetableModel.findAll({
-      where: { ...query },
+      where,
       group: [
         "day_id",
         "major_id",
@@ -82,6 +106,11 @@ controller.StudentSchedule = async (req, res, next) => {
 };
 
 controller.Create = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['LRN LESSON TIMETABLE']
     #swagger.summary = 'Lesson Timetable Student'
@@ -107,6 +136,11 @@ controller.Create = async (req, res, next) => {
 };
 
 controller.FindOne = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['LRN LESSON TIMETABLE']
     #swagger.summary = 'Lesson Timetable Student'
@@ -131,6 +165,11 @@ controller.FindOne = async (req, res, next) => {
 };
 
 controller.Update = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['LRN LESSON TIMETABLE']
     #swagger.summary = 'Lesson Timetable Student'
@@ -160,6 +199,11 @@ controller.Update = async (req, res, next) => {
 };
 
 controller.Delete = async (req, res, next) => {
+  /*
+    #swagger.security = [{
+      "bearerAuth": []
+    }]
+  */
   /* 
     #swagger.tags = ['LRN LESSON TIMETABLE']
     #swagger.summary = 'Lesson Timetable Student'

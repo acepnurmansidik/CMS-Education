@@ -156,6 +156,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -177,6 +182,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "obj",
@@ -206,6 +216,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -223,6 +238,11 @@
         "summary": "Ref parameter",
         "description": "every user has role for access",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "type",
             "default": "level",
@@ -265,6 +285,11 @@
         "description": "every user has role for access",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "obj",
             "in": "body",
             "description": "Create reference parameter",
@@ -294,6 +319,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -315,6 +345,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "obj",
@@ -344,6 +379,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -361,6 +401,11 @@
         "summary": "Master Roler",
         "description": "every user has role for access",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "role_name",
             "default": "Admin",
@@ -397,6 +442,11 @@
         "description": "every user has role for access",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "obj",
             "in": "body",
             "description": "Create new role",
@@ -420,6 +470,11 @@
         "summary": "Master Modul",
         "description": "every user has role for access",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "modul_name",
             "default": "Dashboard",
@@ -456,6 +511,11 @@
         "description": "every user has role for access",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "obj",
             "in": "body",
             "description": "Create new role",
@@ -485,6 +545,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -506,6 +571,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "obj",
@@ -535,6 +605,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -552,6 +627,11 @@
         "summary": "Menu",
         "description": "every user has role for access",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "menu_name",
             "default": "Dashboard",
@@ -595,6 +675,11 @@
         "description": "every user has role for access",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "obj",
             "in": "body",
             "description": "Create new role",
@@ -624,6 +709,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -645,6 +735,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -661,6 +756,13 @@
         ],
         "summary": "Access Role Module",
         "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -674,6 +776,11 @@
         "summary": "Access Role Module",
         "description": "every user has role for access",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "obj",
             "in": "body",
@@ -706,6 +813,11 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -723,6 +835,11 @@
         "summary": "Master User",
         "description": "every user has role for access",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "obj",
             "in": "body",
@@ -755,6 +872,11 @@
             "description": "get data by id using uuid"
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "obj",
             "in": "body",
             "description": "Create new role",
@@ -784,6 +906,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -805,6 +932,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "obj",
@@ -834,6 +966,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -851,6 +988,11 @@
         "summary": "Ref major",
         "description": "every user has role for access",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "type",
             "default": "level",
@@ -893,6 +1035,11 @@
         "description": "every user has role for access",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "obj",
             "in": "body",
             "description": "Create reference parameter",
@@ -915,6 +1062,13 @@
         ],
         "summary": "Access User Role",
         "description": "every user has role for access",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -928,6 +1082,11 @@
         "summary": "Access User Role",
         "description": "every user has role for access",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "obj",
             "in": "body",
@@ -957,6 +1116,11 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -974,6 +1138,11 @@
         "summary": "School Building",
         "description": "every school have buildings",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "building_name",
             "description": "Search by building_name",
@@ -1009,6 +1178,11 @@
         "description": "every school have buildings",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "obj",
             "in": "body",
             "description": "Create new role",
@@ -1038,6 +1212,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1059,6 +1238,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "obj",
@@ -1088,6 +1272,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1105,6 +1294,11 @@
         "summary": "Room Building",
         "description": "every school have buildings",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "room_name",
             "description": "Search by room_name",
@@ -1158,6 +1352,11 @@
         "description": "every school have buildings",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "obj",
             "in": "body",
             "description": "Create new room number",
@@ -1187,6 +1386,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1208,6 +1412,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           },
           {
             "name": "obj",
@@ -1237,6 +1446,11 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1255,6 +1469,23 @@
         "description": "management lesson timetable for student",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "level_id",
+            "description": "filter by level_id",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "major_id",
+            "description": "filter by major_id",
+            "in": "query",
+            "type": "string"
+          },
+          {
             "name": "limit",
             "default": 10,
             "description": "Limit data show",
@@ -1273,7 +1504,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
       "post": {
         "tags": [
@@ -1282,6 +1518,11 @@
         "summary": "Lesson Timetable Student",
         "description": "management lesson timetable for student",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "obj",
             "in": "body",
@@ -1295,7 +1536,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/lesson-timetable/schedule": {
@@ -1306,6 +1552,23 @@
         "summary": "Lesson Timetable Student",
         "description": "management lesson timetable for student",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "level_id",
+            "description": "filter by level_id",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "major_id",
+            "description": "filter by major_id",
+            "in": "query",
+            "type": "string"
+          },
           {
             "name": "limit",
             "default": 10,
@@ -1325,7 +1588,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/lesson-timetable/{id}": {
@@ -1342,13 +1610,23 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
       "put": {
         "tags": [
@@ -1365,6 +1643,11 @@
             "description": "get data by id using uuid"
           },
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "obj",
             "in": "body",
             "description": "Create new room number",
@@ -1377,7 +1660,12 @@
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -1392,13 +1680,23 @@
             "required": true,
             "type": "string",
             "description": "get data by id using uuid"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
           "default": {
             "description": ""
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     }
   },

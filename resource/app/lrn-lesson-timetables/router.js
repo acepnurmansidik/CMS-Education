@@ -1,5 +1,4 @@
 const controller = require("./controller");
-
 const router = require("express").Router();
 
 /**
@@ -9,6 +8,7 @@ const router = require("express").Router();
  * @returns {Array.<User>} 200 - An array of users
  * @returns {Error} 500 - Internal server error
  */
+
 router.get("/", controller.Index);
 router.get("/schedule", controller.StudentSchedule);
 router.post("/", controller.Create);
