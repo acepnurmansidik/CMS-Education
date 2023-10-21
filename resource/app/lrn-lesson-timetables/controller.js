@@ -1,8 +1,6 @@
 const {
   LrnLessonTimetableModel,
 } = require("../../models/lrn-lesson-timetables");
-const { SysRefMajorModel } = require("../../models/sys-ref-major");
-const { SysRefParameterModel } = require("../../models/sys-ref-parameter");
 const { methodConstant } = require("../../utils/constanta");
 const { NotFoundError } = require("../../utils/errors");
 const response = require("../../utils/response");
