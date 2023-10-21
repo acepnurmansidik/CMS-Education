@@ -108,17 +108,20 @@ controller.Login = async (req, res, next) => {
       attributes: ["password", "email", "active", "mst_user_id"],
       include: {
         model: SysMasterUserModel,
-        attributes: ["fullname", "role_status", "unique_number"],
+        attributes: [
+          "fullname",
+          "role_status",
+          "unique_number",
+          "level_id",
+          "major_id",
+        ],
         raw: true,
       },
     });
 
     let payload = { profile: { ...data.dataValues } };
     delete payload.profile.sys_mst_user;
-    payload.profile = {
-      ...payload.profile,
-      ...data.dataValues.sys_mst_user.dataValues,
-    };
+    payload.profile = { ...data.dataValues.sys_mst_user.dataValues };
 
     // compare password from input with saving database
     const isMatch = await bcrypt.compare(password, data.password);
