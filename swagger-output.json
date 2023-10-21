@@ -1766,32 +1766,6 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
-          },
-          {
-            "name": "level_id",
-            "description": "filter by level_id",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "major_id",
-            "description": "filter by major_id",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "limit",
-            "default": 10,
-            "description": "Limit data show",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "page",
-            "default": 1,
-            "description": "Page data show",
-            "in": "query",
-            "type": "string"
           }
         ],
         "responses": {

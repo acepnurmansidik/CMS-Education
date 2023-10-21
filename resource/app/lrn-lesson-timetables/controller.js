@@ -6,6 +6,7 @@ const { SysRefParameterModel } = require("../../models/sys-ref-parameter");
 const { methodConstant } = require("../../utils/constanta");
 const { NotFoundError } = require("../../utils/errors");
 const response = require("../../utils/response");
+const service = require("./service");
 
 const controller = {};
 
@@ -50,54 +51,60 @@ controller.StudentSchedule = async (req, res, next) => {
     #swagger.tags = ['LRN LESSON TIMETABLE']
     #swagger.summary = 'Lesson Timetable Student'
     #swagger.description = 'management lesson timetable for student'
-    #swagger.parameters['level_id'] = { description: 'filter by level_id' }
-    #swagger.parameters['major_id'] = { description: 'filter by major_id' }
-    #swagger.parameters['limit'] = { default: 10, description: 'Limit data show' }
-    #swagger.parameters['page'] = { default: 1, description: 'Page data show' }
   */
   try {
-    // get filter at req.query
-    const { limit, page, ...query } = req.query;
-
     // filter by role login
-    let where = {};
+    let where = { status_active: true };
     let isTeacher = req.login.role_access.findIndex(
       (item) => item.role_name.toLowerCase() === "teacher",
     );
     isTeacher
       ? (where = { ...where, teacher_id: req.login.profile.mst_user_id })
-      : (where = { ...where, ...query });
+      : (where = {
+          ...where,
+          level_id: req.login.profile.level_id,
+          major_id: req.login.profile.major_id,
+        });
 
-    // find data from database with filter condition
-    const result = await LrnLessonTimetableModel.findAll({
-      where,
-      group: [
-        "day_id",
-        "major_id",
-        "level_id",
-        "sys_ref_major.id",
-        "sys_ref_major.role",
-        "level.id",
-        "day.id",
-      ],
-      attributes: ["day_id", "major_id", "level_id"],
-      include: [
-        {
-          model: SysRefMajorModel,
-          attributes: ["role"],
-        },
-        {
-          model: SysRefParameterModel,
-          attributes: ["value"],
-          as: "level",
-        },
-        {
-          model: SysRefParameterModel,
-          attributes: ["value"],
-          as: "day",
-        },
-      ],
-    });
+    // fetxh data from database with filter condition
+    const [result, detailData] = await Promise.all([
+      service.getScheduleWithGrouping({ where }),
+      service.getDetailDataSchedule({ where }),
+    ]);
+
+    for (const dataHeader of result) {
+      let headerDetail = [];
+      for (const dataDetail of detailData) {
+        if (
+          dataHeader.dataValues.day_id === dataDetail.dataValues.day_id &&
+          dataHeader.dataValues.level_id === dataDetail.dataValues.level_id &&
+          dataHeader.dataValues.major_id === dataDetail.dataValues.major_id
+        ) {
+          headerDetail.push({
+            id: dataDetail.dataValues.id,
+            start_class_time: dataDetail.dataValues.start_class_time,
+            end_class_time: dataDetail.dataValues.end_class_time,
+            school_year: dataDetail.dataValues.school_year,
+            lesson: dataDetail.dataValues.lesson.dataValues.value,
+          });
+        }
+      }
+
+      dataHeader.dataValues.details = headerDetail;
+      dataHeader.dataValues.day_name =
+        dataHeader.dataValues.day.dataValues.value;
+      dataHeader.dataValues.grade =
+        dataHeader.dataValues.level.dataValues.value;
+      dataHeader.dataValues.major =
+        dataHeader.dataValues.sys_ref_major.dataValues.role;
+
+      // delete key data
+      const dltKeys = ["major_id", "level_id", "level", "day", "sys_ref_major"];
+      for (const everyKey of dltKeys) {
+        delete dataHeader.dataValues[everyKey];
+      }
+    }
+
     // send success response
     response.MethodResponse(res, methodConstant.GET, result);
   } catch (err) {
