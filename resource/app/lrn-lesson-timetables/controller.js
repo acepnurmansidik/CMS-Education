@@ -78,13 +78,20 @@ controller.StudentSchedule = async (req, res, next) => {
           dataHeader.dataValues.level_id === dataDetail.dataValues.level_id &&
           dataHeader.dataValues.major_id === dataDetail.dataValues.major_id
         ) {
-          headerDetail.push({
+          let _temp = {
             id: dataDetail.dataValues.id,
             start_class_time: dataDetail.dataValues.start_class_time,
             end_class_time: dataDetail.dataValues.end_class_time,
             school_year: dataDetail.dataValues.school_year,
             lesson: dataDetail.dataValues.lesson.dataValues.value,
-          });
+            ...dataDetail.dataValues.lrn_floor_building.dataValues,
+            ...dataDetail.dataValues.lrn_floor_building.dataValues
+              .lrn_school_building.dataValues,
+          };
+          delete _temp.lrn_school_building;
+          delete _temp.school_building_id;
+
+          headerDetail.push(_temp);
         }
       }
 

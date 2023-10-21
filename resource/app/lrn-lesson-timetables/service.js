@@ -1,7 +1,8 @@
-const { Sequelize } = require("sequelize");
+const { LrnFloorBuildingModel } = require("../../models/lrn-floor-building");
 const {
   LrnLessonTimetableModel,
 } = require("../../models/lrn-lesson-timetables");
+const { LrnSchoolBuildingModel } = require("../../models/lrn-school-building");
 const { SysRefMajorModel } = require("../../models/sys-ref-major");
 const { SysRefParameterModel } = require("../../models/sys-ref-parameter");
 
@@ -58,6 +59,14 @@ service.getDetailDataSchedule = async ({ where }) => {
         model: SysRefParameterModel,
         attributes: ["value"],
         as: "lesson",
+      },
+      {
+        model: LrnFloorBuildingModel,
+        attributes: ["floor", "room_name", "room_code", "school_building_id"],
+        include: {
+          model: LrnSchoolBuildingModel,
+          attributes: ["building_name"],
+        },
       },
     ],
   });
