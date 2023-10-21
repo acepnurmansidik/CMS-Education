@@ -119,9 +119,13 @@ controller.Login = async (req, res, next) => {
       },
     });
 
-    let payload = { profile: { ...data.dataValues } };
+    let payload = {
+      profile: {
+        ...data.dataValues,
+        ...data.dataValues.sys_mst_user.dataValues,
+      },
+    };
     delete payload.profile.sys_mst_user;
-    payload.profile = { ...data.dataValues.sys_mst_user.dataValues };
 
     // compare password from input with saving database
     const isMatch = await bcrypt.compare(password, data.password);
