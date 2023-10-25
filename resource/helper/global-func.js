@@ -76,7 +76,7 @@ globalFunc.verifyPassword = async ({ password, hashPassword }) => {
  * |
  */
 globalFunc.generateJwtToken = async (payload, next) => {
-  delete payload.password;
+  delete payload.profile.password;
   const jwtSignOptions = {
     algorithm: ENV.algorithmToken,
     expiresIn: ENV.jwtExpired,

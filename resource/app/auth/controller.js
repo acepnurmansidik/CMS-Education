@@ -109,6 +109,7 @@ controller.Login = async (req, res, next) => {
       include: {
         model: SysMasterUserModel,
         attributes: [
+          "id",
           "fullname",
           "role_status",
           "unique_number",
@@ -126,6 +127,7 @@ controller.Login = async (req, res, next) => {
       },
     };
     delete payload.profile.sys_mst_user;
+    delete payload.profile.mst_user_id;
 
     // compare password from input with saving database
     const isMatch = await bcrypt.compare(password, data.password);
@@ -151,10 +153,11 @@ controller.Login = async (req, res, next) => {
     const _tempRole = [];
     for (const everyRole of roles) {
       _tempRoleID.push(everyRole.role_id);
-      _tempRole.push({
-        id: everyRole.role_id,
-        role_name: everyRole["sys_mst_role.role_name"],
-      });
+      // _tempRole.push({
+      //   id: everyRole.role_id,
+      //   role_name: everyRole["sys_mst_role.role_name"],
+      // });
+      _tempRole.push(everyRole["sys_mst_role.role_name"]);
     }
 
     const moduls = await SysAccessRoleModul.findAll({
@@ -177,13 +180,16 @@ controller.Login = async (req, res, next) => {
 
     const _tempModul = [];
     for (const everyModul of moduls) {
-      _tempModul.push({
-        modul_id: everyModul.modul_id,
-        modul_name: everyModul.dataValues.sys_mst_modul.dataValues.modul_name,
-      });
+      // _tempModul.push({
+      //   modul_id: everyModul.modul_id,
+      //   modul_name: everyModul.dataValues.sys_mst_modul.dataValues.modul_name,
+      // });
+      _tempModul.push(
+        everyModul.dataValues.sys_mst_modul.dataValues.modul_name,
+      );
     }
-    payload.role_access = _tempRole;
-    payload.modul_access = _tempModul;
+    payload.role_access = _tempRole.join(",");
+    payload.modul_access = _tempModul.join(",");
 
     // create JWT token for response
     const result = await globalFunc.generateJwtToken(payload);
