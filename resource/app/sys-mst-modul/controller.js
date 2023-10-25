@@ -29,19 +29,15 @@ controller.Index = async (req, res, next) => {
       { opr: compaOpr.ILIKE, values: { modul_name } },
     ]);
 
-    const include = globalFunc.JoinsRelation([
-      {
-        model: SysMenuModel,
-        include: [],
-      },
-    ]);
-
     // get data from database
     const result = await SysMasterModulModel.findAll({
       where,
       offset: page - 1,
       limit,
-      include,
+      include: {
+        model: SysMenuModel,
+        include: [],
+      },
     });
 
     // send success response
@@ -69,9 +65,13 @@ controller.Create = async (req, res, next) => {
   */
   try {
     // get data from body payload
-    const payload = req.body;
+    let { modul_name } = req.body;
+    modul_name = modul_name.replace(
+      /\w\S*/g,
+      (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(),
+    );
     // saving to databse
-    const result = await SysMasterModulModel.create(payload);
+    const result = await SysMasterModulModel.create({ modul_name });
     // send success response
     response.MethodResponse(res, methodConstant.POST, result);
   } catch (err) {
@@ -94,17 +94,13 @@ controller.FindOne = async (req, res, next) => {
   try {
     // get data from body payload
     const id = req.params.id;
-    // joins
-    const include = globalFunc.JoinsRelation([
-      {
-        model: SysMenuModel,
-        include: [],
-      },
-    ]);
     // checking data from database
     const result = await SysMasterModulModel.findOne({
       where: { id },
-      include,
+      include: {
+        model: SysMenuModel,
+        include: [],
+      },
     });
     // send error data not found
     if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
@@ -135,7 +131,11 @@ controller.Update = async (req, res, next) => {
   try {
     // get data from body payload and params
     const id = req.params.id;
-    const payload = req.body;
+    let { modul_name } = req.body;
+    modul_name = modul_name.replace(
+      /\w\S*/g,
+      (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(),
+    );
 
     // checking data from database
     const result = await SysMasterModulModel.findOne({ where: { id } });
@@ -144,7 +144,7 @@ controller.Update = async (req, res, next) => {
     if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
 
     // saving to databse
-    await SysMasterModulModel.update(payload, { where: { id } });
+    await SysMasterModulModel.update({ modul_name }, { where: { id } });
 
     // send success response
     response.MethodResponse(res, methodConstant.PUT, null);

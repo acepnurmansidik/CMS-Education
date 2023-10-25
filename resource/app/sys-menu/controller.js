@@ -32,19 +32,15 @@ controller.Index = async (req, res, next) => {
       { opr: compaOpr.AND, values: { mst_modul_id } },
     ]);
 
-    const include = globalFunc.JoinsRelation([
-      {
-        model: SysMasterModulModel,
-        include: [],
-      },
-    ]);
-
     // get data from database
     const result = await SysMenuModel.findAll({
       where,
       offset: page - 1,
       limit,
-      include,
+      include: {
+        model: SysMasterModulModel,
+        include: [],
+      },
     });
 
     // send success response
@@ -72,9 +68,12 @@ controller.Create = async (req, res, next) => {
   */
   try {
     // get data from body payload
-    const payload = req.body;
+    let { menu_name, ...payload } = req.body;
+    menu_name = menu_name.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
     // saving to databse
-    const result = await SysMenuModel.create(payload);
+    const result = await SysMenuModel.create({ menu_name, ...payload });
     // send success response
     response.MethodResponse(res, methodConstant.POST, result);
   } catch (err) {
@@ -97,15 +96,16 @@ controller.FindOne = async (req, res, next) => {
   try {
     // get uuid from params
     const id = req.params.id;
-    // joins relation
-    const include = globalFunc.JoinsRelation([
-      {
+
+    // find data on database by uuid
+    const result = await SysMenuModel.findOne({
+      where: { id },
+      include: {
         model: SysMasterModulModel,
         include: [],
       },
-    ]);
-    // find data on database by uuid
-    const result = await SysMenuModel.findOne({ where: { id }, include });
+    });
+
     // when data empty send not found
     if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
     // send success response
@@ -134,8 +134,12 @@ controller.Update = async (req, res, next) => {
   */
   try {
     // get data from body payload and uuid from params
-    const payload = req.body;
     const id = req.params.id;
+    let { menu_name, ...payload } = req.body;
+    menu_name = menu_name.replace(
+      /\w\S*/g,
+      (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(),
+    );
 
     // get data on database by uuid
     const result = await SysMenuModel.findOne({ where: { id } });
@@ -144,7 +148,7 @@ controller.Update = async (req, res, next) => {
     if (!result) throw new NotFoundError(`Data with ID ${id} not found!`);
 
     // update to database
-    await SysMenuModel.update(payload, { where: { id } });
+    await SysMenuModel.update({ menu_name, ...payload }, { where: { id } });
 
     // send success response
     response.MethodResponse(res, methodConstant.POST, result);

@@ -25,6 +25,12 @@ const SysMasterModulModel = DBConn.define(
     updatedAt: true,
     paranoid: true,
     underscored: true,
+    indexes: [
+      {
+        unique: true,
+        fields: ["modul_name"],
+      },
+    ],
   },
 );
 

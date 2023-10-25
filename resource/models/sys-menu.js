@@ -31,6 +31,12 @@ const SysMenuModel = DBConn.define("sys_menu", SysMenuModelDefine, {
   updatedAt: true,
   paranoid: true,
   underscored: true,
+  indexes: [
+    {
+      unique: true,
+      fields: ["menu_name"],
+    },
+  ],
 });
 
 // Definisikan relasi
