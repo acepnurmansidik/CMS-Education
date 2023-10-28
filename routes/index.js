@@ -12,6 +12,7 @@ const UserRolesRouter = require("../resource/app/sys-user-role/router");
 const SchooldBuildingsRouter = require("../resource/app/lrn-school-building/router");
 const FloordBuildingsRouter = require("../resource/app/lrn-floor-building/router");
 const LessonTimetableRouter = require("../resource/app/lrn-lesson-timetables/router");
+const ScoreLimitRouter = require("../resource/app/lrn-score-limit/router");
 const {
   AuthorizeUserLogin,
   AuthorizeRoleAccess,
@@ -31,5 +32,6 @@ router.use(`/user-access`, UserRolesRouter);
 router.use(`/building`, SchooldBuildingsRouter);
 router.use(`/room-building`, FloordBuildingsRouter);
 router.use(`/lesson-timetable`, LessonTimetableRouter);
+router.use(`/score-limit`, ScoreLimitRouter);
 
 module.exports = router;

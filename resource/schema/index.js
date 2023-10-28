@@ -10,6 +10,7 @@ const UserRolesModulSchema = require("./sys-user-roles");
 const SchoolBuildingSchema = require("./lrn-school-building");
 const FloorBuildingSchema = require("./lrn-floor-building");
 const LessonTimetablesSchema = require("./lrn-lesson-timetables");
+const ScoreLimitLevelUptablesSchema = require("./lrn-score-limit");
 
 const GlobalSchema = {
   ...UserSchema,
@@ -24,6 +25,7 @@ const GlobalSchema = {
   ...SchoolBuildingSchema,
   ...FloorBuildingSchema,
   ...LessonTimetablesSchema,
+  ...ScoreLimitLevelUptablesSchema,
 };
 
 module.exports = GlobalSchema;
