@@ -20,7 +20,7 @@ const {
 
 router.use(`/`, userRouter);
 router.use(AuthorizeUserLogin);
-router.use(AuthorizeRoleAccess);
+// router.use(AuthorizeRoleAccess);
 router.use(`/ref-param`, refParamRouter);
 router.use(`/master-role`, masterRoleRouter);
 router.use(`/master-modul`, masterModulRouter);

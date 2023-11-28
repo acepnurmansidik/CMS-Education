@@ -53,18 +53,17 @@ controller.StudentSchedule = async (req, res, next) => {
   try {
     // filter by role login
     let where = { status_active: true };
-    let isTeacher = req.login.role_access.findIndex(
-      (item) => item.role_name.toLowerCase() === "teacher",
-    );
-    isTeacher
-      ? (where = { ...where, teacher_id: req.login.profile.mst_user_id })
+
+    // check schedule by role login
+    req.login.role_access.includes("teacher")
+      ? (where = { ...where, teacher_id: req.login.profile.id })
       : (where = {
           ...where,
           level_id: req.login.profile.level_id,
           major_id: req.login.profile.major_id,
         });
 
-    // fetxh data from database with filter condition
+    // fetch data from database with filter condition
     const [result, detailData] = await Promise.all([
       service.getScheduleWithGrouping({ where }),
       service.getDetailDataSchedule({ where }),
