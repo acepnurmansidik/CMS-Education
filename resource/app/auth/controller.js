@@ -218,7 +218,8 @@ controller.Activation = async (req, res, next) => {
     const result = await UserModel.findOne({ where: { email }, raw: true });
 
     // check OTP number expired date
-    if (DateTime.local(result.otp_expired).setZone(timeZone).diffNow().isValid)
+    const dateNow = new Date();
+    if (Date.parse(result.otp_expired) > dateNow)
       throw new BadRequestError("OTP number has expired!");
 
     if (result.active)
@@ -230,7 +231,7 @@ controller.Activation = async (req, res, next) => {
       throw new BadRequestError("Wrong OTP number, please check your email");
 
     // active account
-    // await UserModel.update({ active: true }, { where: { id: result.id } });
+    await UserModel.update({ active: true }, { where: { id: result.id } });
     return res.status(201).json({
       code: 201,
       status: true,
