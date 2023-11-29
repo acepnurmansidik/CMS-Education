@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const DBConn = require("../../../db");
-const { SysRefParameterModel } = require("../sys-ref-parameter");
-const { SysFileUploadModel } = require("../sys-file-upload");
+const { SysRefParameterModel } = require("../setting/sys-ref-parameter");
+const { SysFileUploadModel } = require("../setting/sys-file-upload");
 
 const LrnQuestionModelDefine = {
   id: {

@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const DBConn = require("../../../db");
-const { SysRefParameterModel } = require("../sys-ref-parameter");
-const { SysMasterUserModel } = require("../sys-mst-user");
+const { SysRefParameterModel } = require("../setting/sys-ref-parameter");
+const { SysMasterUserModel } = require("../setting/sys-mst-user");
 
 const LrnExamQuestionsModelDefine = {
   id: {

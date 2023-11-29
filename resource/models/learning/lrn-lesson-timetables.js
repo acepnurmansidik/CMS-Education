@@ -1,9 +1,9 @@
 const { DataTypes } = require("sequelize");
-const DBConn = require("../../db");
-const { SysMasterUserModel } = require("./sys-mst-user");
-const { SysRefParameterModel } = require("./sys-ref-parameter");
+const DBConn = require("../../../db");
+const { SysMasterUserModel } = require("../setting/sys-mst-user");
+const { SysRefParameterModel } = require("../setting/sys-ref-parameter");
 const { LrnFloorBuildingModel } = require("./lrn-floor-building");
-const { SysRefMajorModel } = require("./sys-ref-major");
+const { SysRefMajorModel } = require("../setting/sys-ref-major");
 
 const LrnLessonTimetableModelDefine = {
   id: {

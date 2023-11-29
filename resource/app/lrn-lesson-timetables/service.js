@@ -1,10 +1,16 @@
-const { LrnFloorBuildingModel } = require("../../models/lrn-floor-building");
+const {
+  LrnFloorBuildingModel,
+} = require("../../models/learning/lrn-floor-building");
 const {
   LrnLessonTimetableModel,
-} = require("../../models/lrn-lesson-timetables");
-const { LrnSchoolBuildingModel } = require("../../models/lrn-school-building");
-const { SysRefMajorModel } = require("../../models/sys-ref-major");
-const { SysRefParameterModel } = require("../../models/sys-ref-parameter");
+} = require("../../models/learning/lrn-lesson-timetables");
+const {
+  LrnSchoolBuildingModel,
+} = require("../../models/learning/lrn-school-building");
+const { SysRefMajorModel } = require("../../models/setting/sys-ref-major");
+const {
+  SysRefParameterModel,
+} = require("../../models/setting/sys-ref-parameter");
 
 const service = {};
 

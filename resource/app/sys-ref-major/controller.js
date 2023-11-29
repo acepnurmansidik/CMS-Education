@@ -2,7 +2,7 @@ const response = require("../../utils/response");
 const { methodConstant } = require("../../utils/constanta");
 const { Sequelize } = require("sequelize");
 const { globalFunc } = require("../../helper/global-func");
-const { SysRefMajorModel } = require("../../models/sys-ref-major");
+const { SysRefMajorModel } = require("../../models/setting/sys-ref-major");
 const { BadRequestError } = require("../../utils/errors");
 
 const controller = {};

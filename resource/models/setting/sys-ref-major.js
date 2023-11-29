@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const DBConn = require("../../db");
+const DBConn = require("../../../db");
 
 const SysRefMajorModelDefine = {
   id: {
@@ -24,15 +24,19 @@ const SysRefMajorModelDefine = {
   },
 };
 
-const SysRefMajorModel = DBConn.define("sys_ref_major", SysRefMajorModelDefine, {
-  timestamps: true,
-  schema: "setting",
-  force: false,
-  createdAt: true,
-  updatedAt: true,
-  paranoid: true,
-  underscored: true,
-});
+const SysRefMajorModel = DBConn.define(
+  "sys_ref_major",
+  SysRefMajorModelDefine,
+  {
+    timestamps: true,
+    schema: "setting",
+    force: false,
+    createdAt: true,
+    updatedAt: true,
+    paranoid: true,
+    underscored: true,
+  },
+);
 
 delete SysRefMajorModelDefine.id;
 Object.keys(SysRefMajorModelDefine).map((item) => {

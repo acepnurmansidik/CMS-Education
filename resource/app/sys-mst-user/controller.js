@@ -1,4 +1,4 @@
-const { SysMasterUserModel } = require("../../models/sys-mst-user");
+const { SysMasterUserModel } = require("../../models/setting/sys-mst-user");
 const { methodConstant } = require("../../utils/constanta");
 const { NotFoundError } = require("../../utils/errors");
 const response = require("../../utils/response");

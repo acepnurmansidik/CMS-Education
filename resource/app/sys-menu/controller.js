@@ -1,10 +1,10 @@
 const { Op } = require("sequelize");
 const { globalFunc } = require("../../helper/global-func");
-const { SysMenuModel } = require("../../models/sys-menu");
+const { SysMenuModel } = require("../../models/setting/sys-menu");
 const { compaOpr, methodConstant } = require("../../utils/constanta");
 const { NotFoundError } = require("../../utils/errors");
 const response = require("../../utils/response");
-const { SysMasterModulModel } = require("../../models/sys-mst-modul");
+const { SysMasterModulModel } = require("../../models/setting/sys-mst-modul");
 
 const controller = {};
 

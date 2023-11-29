@@ -1,5 +1,7 @@
 const response = require("../../utils/response");
-const { SysRefParameterModel } = require("../../models/sys-ref-parameter");
+const {
+  SysRefParameterModel,
+} = require("../../models/setting/sys-ref-parameter");
 const { methodConstant } = require("../../utils/constanta");
 const { Sequelize } = require("sequelize");
 const { NotFoundError } = require("../../utils/errors");

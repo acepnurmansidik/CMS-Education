@@ -1,6 +1,6 @@
-const { SysUserRolesModul } = require("../../models/sys-user-roles");
-const { SysMasterRoleModel } = require("../../models/sys-mst-role");
-const { SysMasterUserModel } = require("../../models/sys-mst-user");
+const { SysUserRolesModul } = require("../../models/setting/sys-user-roles");
+const { SysMasterRoleModel } = require("../../models/setting/sys-mst-role");
+const { SysMasterUserModel } = require("../../models/setting/sys-mst-user");
 const { methodConstant } = require("../../utils/constanta");
 const { NotFoundError } = require("../../utils/errors");
 const response = require("../../utils/response");

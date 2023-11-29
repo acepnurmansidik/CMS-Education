@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const DBConn = require("../../db");
-const { SysMasterUserModel } = require("./sys-mst-user");
+const { SysMasterUserModel } = require("./setting/sys-mst-user");
 
 const UserModelDefine = {
   email: {

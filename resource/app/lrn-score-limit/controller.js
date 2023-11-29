@@ -1,6 +1,8 @@
-const { LrnScoreLimitModel } = require("../../models/lrn-score-limit");
-const { SysRefMajorModel } = require("../../models/sys-ref-major");
-const { SysRefParameterModel } = require("../../models/sys-ref-parameter");
+const { LrnScoreLimitModel } = require("../../models/learning/lrn-score-limit");
+const { SysRefMajorModel } = require("../../models/setting/sys-ref-major");
+const {
+  SysRefParameterModel,
+} = require("../../models/setting/sys-ref-parameter");
 const { methodConstant } = require("../../utils/constanta");
 const { NotFoundError } = require("../../utils/errors");
 const response = require("../../utils/response");

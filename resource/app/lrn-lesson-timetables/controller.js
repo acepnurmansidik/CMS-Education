@@ -1,6 +1,6 @@
 const {
   LrnLessonTimetableModel,
-} = require("../../models/lrn-lesson-timetables");
+} = require("../../models/learning/lrn-lesson-timetables");
 const { methodConstant } = require("../../utils/constanta");
 const { NotFoundError } = require("../../utils/errors");
 const response = require("../../utils/response");

@@ -1,6 +1,6 @@
 const { DateTime } = require("luxon");
-const { SysRefMajorModel } = require("../../models/sys-ref-major");
-const { SysMasterUserModel } = require("../../models/sys-mst-user");
+const { SysRefMajorModel } = require("../../models/setting/sys-ref-major");
+const { SysMasterUserModel } = require("../../models/setting/sys-mst-user");
 const { Op, literal, fn, col, Sequelize, QueryTypes } = require("sequelize");
 const DBConn = require("../../../db");
 

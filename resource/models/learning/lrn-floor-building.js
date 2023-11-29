@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
-const DBConn = require("../../db");
-const {LrnSchoolBuildingModel} = require("./lrn-school-building");
+const DBConn = require("../../../db");
+const { LrnSchoolBuildingModel } = require("./lrn-school-building");
 
 const LrnFloorBuildingModelDefine = {
   id: {
@@ -47,8 +47,12 @@ const LrnFloorBuildingModel = DBConn.define(
 );
 
 // Definisikan relasi
-LrnFloorBuildingModel.belongsTo(LrnSchoolBuildingModel, { foreignKey: "school_building_id" });
-LrnSchoolBuildingModel.hasMany(LrnFloorBuildingModel, { foreignKey: "school_building_id" });
+LrnFloorBuildingModel.belongsTo(LrnSchoolBuildingModel, {
+  foreignKey: "school_building_id",
+});
+LrnSchoolBuildingModel.hasMany(LrnFloorBuildingModel, {
+  foreignKey: "school_building_id",
+});
 
 delete LrnFloorBuildingModelDefine.id;
 Object.keys(LrnFloorBuildingModelDefine).map((item) => {

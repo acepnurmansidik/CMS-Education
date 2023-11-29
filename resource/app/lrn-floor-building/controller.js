@@ -1,4 +1,6 @@
-const { LrnFloorBuildingModel } = require("../../models/lrn-floor-building");
+const {
+  LrnFloorBuildingModel,
+} = require("../../models/learning/lrn-floor-building");
 const { methodConstant } = require("../../utils/constanta");
 const { NotFoundError } = require("../../utils/errors");
 const response = require("../../utils/response");

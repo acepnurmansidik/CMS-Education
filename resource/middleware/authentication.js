@@ -1,9 +1,11 @@
 const { Op } = require("sequelize");
 const { verifyJwtToken } = require("../helper/global-func");
-const { SysAccessRoleModul } = require("../models/sys-access-roles-moduls");
-const { SysMasterModulModel } = require("../models/sys-mst-modul");
-const { SysMasterRoleModel } = require("../models/sys-mst-role");
-const { SysUserRolesModul } = require("../models/sys-user-roles");
+const {
+  SysAccessRoleModul,
+} = require("../models/setting/sys-access-roles-moduls");
+const { SysMasterModulModel } = require("../models/setting/sys-mst-modul");
+const { SysMasterRoleModel } = require("../models/setting/sys-mst-role");
+const { SysUserRolesModul } = require("../models/setting/sys-user-roles");
 const { UserModel } = require("../models/user-auth");
 const { UnauthenticatedError, BadRequestError } = require("../utils/errors");
 const NotFound = require("../utils/errors/not-found");

@@ -4,16 +4,18 @@ const bcrypt = require("bcrypt");
 const { BadRequestError } = require("../../utils/errors/index");
 const response = require("../../utils/response");
 const { methodConstant } = require("../../utils/constanta");
-const { SysMasterUserModel } = require("../../models/sys-mst-user");
-const { SysUserRolesModul } = require("../../models/sys-user-roles");
+const { SysMasterUserModel } = require("../../models/setting/sys-mst-user");
+const { SysUserRolesModul } = require("../../models/setting/sys-user-roles");
 const service = require("./service");
 const DBConn = require("../../../db");
 const { DateTime } = require("luxon");
 const { timeZone } = require("../../utils/config");
-const { SysMasterRoleModel } = require("../../models/sys-mst-role");
-const { SysAccessRoleModul } = require("../../models/sys-access-roles-moduls");
+const { SysMasterRoleModel } = require("../../models/setting/sys-mst-role");
+const {
+  SysAccessRoleModul,
+} = require("../../models/setting/sys-access-roles-moduls");
 const { Op } = require("sequelize");
-const { SysMasterModulModel } = require("../../models/sys-mst-modul");
+const { SysMasterModulModel } = require("../../models/setting/sys-mst-modul");
 
 const controller = {};
 controller.Register = async (req, res, next) => {

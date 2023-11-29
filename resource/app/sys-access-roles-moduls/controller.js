@@ -1,8 +1,10 @@
 const { Op } = require("sequelize");
 const { globalFunc } = require("../../helper/global-func");
-const { SysAccessRoleModul } = require("../../models/sys-access-roles-moduls");
-const { SysMasterModulModel } = require("../../models/sys-mst-modul");
-const { SysMasterRoleModel } = require("../../models/sys-mst-role");
+const {
+  SysAccessRoleModul,
+} = require("../../models/setting/sys-access-roles-moduls");
+const { SysMasterModulModel } = require("../../models/setting/sys-mst-modul");
+const { SysMasterRoleModel } = require("../../models/setting/sys-mst-role");
 const { compaOpr, methodConstant } = require("../../utils/constanta");
 const { NotFoundError } = require("../../utils/errors");
 const response = require("../../utils/response");

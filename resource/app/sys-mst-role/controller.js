@@ -1,5 +1,5 @@
 const response = require("../../utils/response");
-const { SysMasterRoleModel } = require("../../models/sys-mst-role");
+const { SysMasterRoleModel } = require("../../models/setting/sys-mst-role");
 const { methodConstant } = require("../../utils/constanta");
 const { Sequelize, Op } = require("sequelize");
 const { NotFoundError } = require("../../utils/errors");

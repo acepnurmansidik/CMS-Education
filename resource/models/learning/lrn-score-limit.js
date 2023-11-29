@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
-const DBConn = require("../../db");
-const { SysRefMajorModel } = require("./sys-ref-major");
-const { SysRefParameterModel } = require("./sys-ref-parameter");
+const DBConn = require("../../../db");
+const { SysRefMajorModel } = require("../setting/sys-ref-major");
+const { SysRefParameterModel } = require("../setting/sys-ref-parameter");
 
 const LrnScoreLimitModelDefine = {
   id: {

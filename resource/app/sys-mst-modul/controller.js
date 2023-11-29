@@ -1,6 +1,6 @@
 const { globalFunc } = require("../../helper/global-func");
-const { SysMenuModel } = require("../../models/sys-menu");
-const { SysMasterModulModel } = require("../../models/sys-mst-modul");
+const { SysMenuModel } = require("../../models/setting/sys-menu");
+const { SysMasterModulModel } = require("../../models/setting/sys-mst-modul");
 const { compaOpr, methodConstant } = require("../../utils/constanta");
 const { NotFoundError } = require("../../utils/errors");
 const response = require("../../utils/response");

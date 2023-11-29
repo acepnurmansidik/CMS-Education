@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const DBConn = require("../../db");
+const DBConn = require("../../../db");
 
 const SysMstRoleModelDefine = {
   id: {
