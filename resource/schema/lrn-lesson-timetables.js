@@ -1,6 +1,6 @@
 const {
   LrnLessonTimetableModelDefine,
-} = require("../models/lrn-lesson-timetables");
+} = require("../models/learning/lrn-lesson-timetables");
 
 const LessonTimetableSchema = {
   BodyLessonTimetableSchema: LrnLessonTimetableModelDefine,

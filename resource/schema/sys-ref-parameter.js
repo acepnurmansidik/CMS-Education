@@ -1,4 +1,6 @@
-const { SysRefParameterModelDefine } = require("../models/sys-ref-parameter");
+const {
+  SysRefParameterModelDefine,
+} = require("../models/setting/sys-ref-parameter");
 
 const RefParameterSchema = {
   BodyRefParameterSchema: {

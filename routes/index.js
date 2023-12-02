@@ -13,6 +13,7 @@ const SchooldBuildingsRouter = require("../resource/app/lrn-school-building/rout
 const FloordBuildingsRouter = require("../resource/app/lrn-floor-building/router");
 const LessonTimetableRouter = require("../resource/app/lrn-lesson-timetables/router");
 const ScoreLimitRouter = require("../resource/app/lrn-score-limit/router");
+const ExamRouter = require("../resource/app/lrn-exam/router");
 const {
   AuthorizeUserLogin,
   AuthorizeRoleAccess,
@@ -33,5 +34,6 @@ router.use(`/building`, SchooldBuildingsRouter);
 router.use(`/room-building`, FloordBuildingsRouter);
 router.use(`/lesson-timetable`, LessonTimetableRouter);
 router.use(`/score-limit`, ScoreLimitRouter);
+router.use(`/exam`, ExamRouter);
 
 module.exports = router;

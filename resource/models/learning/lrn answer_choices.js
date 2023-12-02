@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const DBConn = require("../../../db");
 const { SysRefParameterModel } = require("../setting/sys-ref-parameter");
 const { SysFileUploadModel } = require("../setting/sys-file-upload");
-const { LrnQuestionModel } = require("./Irn_question");
+const { LrnQuestionModel } = require("./lrn_question");
 
 const LrnAnswerChoiceModelDefine = {
   id: {
@@ -13,7 +13,8 @@ const LrnAnswerChoiceModelDefine = {
   description: {
     type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: 1,
+    defaultValue: "Lorem ipsum",
+    unique: true,
   },
   flag_img: {
     type: DataTypes.BOOLEAN,
@@ -23,14 +24,16 @@ const LrnAnswerChoiceModelDefine = {
   question_id: {
     type: DataTypes.UUID,
     allowNull: false,
+    unique: true,
     references: {
-      model: SysRefParameterModel,
+      model: LrnQuestionModel,
       key: "id",
     },
   },
-  answer_type: {
+  answer_type_id: {
     type: DataTypes.UUID,
     allowNull: false,
+    unique: true,
     references: {
       model: SysRefParameterModel,
       key: "id",
@@ -38,7 +41,7 @@ const LrnAnswerChoiceModelDefine = {
   },
   file_url_id: {
     type: DataTypes.UUID,
-    allowNull: false,
+    allowNull: true,
     references: {
       model: SysFileUploadModel,
       key: "id",
@@ -47,7 +50,7 @@ const LrnAnswerChoiceModelDefine = {
 };
 
 const LrnAnswerChoiceModel = DBConn.define(
-  "lrn_question",
+  "lrn_answer_choices",
   LrnAnswerChoiceModelDefine,
   {
     timestamps: true,
@@ -62,10 +65,10 @@ const LrnAnswerChoiceModel = DBConn.define(
 
 // Definisikan relasi
 LrnAnswerChoiceModel.belongsTo(SysRefParameterModel, {
-  foreignKey: "answer_type",
+  foreignKey: "answer_type_id",
 });
 SysRefParameterModel.hasMany(LrnAnswerChoiceModel, {
-  foreignKey: "answer_type",
+  foreignKey: "answer_type_id",
 });
 
 LrnAnswerChoiceModel.belongsTo(LrnQuestionModel, {

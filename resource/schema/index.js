@@ -11,6 +11,7 @@ const SchoolBuildingSchema = require("./lrn-school-building");
 const FloorBuildingSchema = require("./lrn-floor-building");
 const LessonTimetablesSchema = require("./lrn-lesson-timetables");
 const ScoreLimitLevelUptablesSchema = require("./lrn-score-limit");
+const QuestionExamSchema = require("./lrn-exam");
 
 const GlobalSchema = {
   ...UserSchema,
@@ -26,6 +27,7 @@ const GlobalSchema = {
   ...FloorBuildingSchema,
   ...LessonTimetablesSchema,
   ...ScoreLimitLevelUptablesSchema,
+  ...QuestionExamSchema,
 };
 
 module.exports = GlobalSchema;

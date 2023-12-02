@@ -1,6 +1,6 @@
 const {
   LrnFloorBuildingModelDefine,
-} = require("../models/lrn-floor-building");
+} = require("../models/learning/lrn-floor-building");
 
 const FloorBuildingSchema = {
   BodyFloorBuildingSchema: LrnFloorBuildingModelDefine,

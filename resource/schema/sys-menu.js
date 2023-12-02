@@ -1,4 +1,4 @@
-const { SysMenuModelDefine } = require("../models/sys-menu");
+const { SysMenuModelDefine } = require("../models/setting/sys-menu");
 
 const MenuSchema = {
   BodyMenuSchema: SysMenuModelDefine,

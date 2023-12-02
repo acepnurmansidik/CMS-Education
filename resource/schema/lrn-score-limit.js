@@ -1,4 +1,6 @@
-const { LrnScoreLimitModelDefine } = require("../models/lrn-score-limit");
+const {
+  LrnScoreLimitModelDefine,
+} = require("../models/learning/lrn-score-limit");
 
 const ScoreLimitSchema = {
   BodyScoreLimitSchema: LrnScoreLimitModelDefine,

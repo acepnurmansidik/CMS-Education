@@ -1,4 +1,4 @@
-const { SysMstRoleModelDefine } = require("../models/sys-mst-role");
+const { SysMstRoleModelDefine } = require("../models/setting/sys-mst-role");
 
 const MasterRoleSchema = {
   BodyMasterRoleSchema: SysMstRoleModelDefine,

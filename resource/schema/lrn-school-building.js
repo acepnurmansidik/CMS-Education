@@ -1,6 +1,6 @@
 const {
   LrnSchoolBuildingModelDefine,
-} = require("../models/lrn-school-building");
+} = require("../models/learning/lrn-school-building");
 
 const SchoolBuildingSchema = {
   BodySchoolBuildingSchema: LrnSchoolBuildingModelDefine,

@@ -1,4 +1,4 @@
-const { SysRefMajorModelDefine } = require("../models/sys-ref-major");
+const { SysRefMajorModelDefine } = require("../models/setting/sys-ref-major");
 
 const RefMajorSchema = {
   BodyRefMajorSchema: SysRefMajorModelDefine,

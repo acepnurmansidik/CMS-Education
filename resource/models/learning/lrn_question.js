@@ -2,6 +2,7 @@ const { DataTypes } = require("sequelize");
 const DBConn = require("../../../db");
 const { SysRefParameterModel } = require("../setting/sys-ref-parameter");
 const { SysFileUploadModel } = require("../setting/sys-file-upload");
+const { LrnExamQuestionsModel } = require("./lrn_exam_questions");
 
 const LrnQuestionModelDefine = {
   id: {
@@ -13,6 +14,7 @@ const LrnQuestionModelDefine = {
     type: DataTypes.INTEGER,
     allowNull: false,
     defaultValue: 1,
+    unique: true,
   },
   value: {
     type: DataTypes.INTEGER,
@@ -22,6 +24,7 @@ const LrnQuestionModelDefine = {
   question: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
   },
   flag_img: {
     type: DataTypes.BOOLEAN,
@@ -31,6 +34,7 @@ const LrnQuestionModelDefine = {
   question_type_id: {
     type: DataTypes.UUID,
     allowNull: false,
+    unique: true,
     references: {
       model: SysRefParameterModel,
       key: "id",
@@ -39,14 +43,16 @@ const LrnQuestionModelDefine = {
   exam_id: {
     type: DataTypes.UUID,
     allowNull: false,
+    unique: true,
     references: {
-      model: SysRefParameterModel,
+      model: LrnExamQuestionsModel,
       key: "id",
     },
   },
   right_answer: {
     type: DataTypes.UUID,
     allowNull: false,
+    unique: true,
     references: {
       model: SysRefParameterModel,
       key: "id",
@@ -54,7 +60,7 @@ const LrnQuestionModelDefine = {
   },
   file_url_id: {
     type: DataTypes.UUID,
-    allowNull: false,
+    allowNull: true,
     references: {
       model: SysFileUploadModel,
       key: "id",
@@ -80,11 +86,13 @@ SysRefParameterModel.hasMany(LrnQuestionModel, {
   foreignKey: "question_type_id",
 });
 
-LrnQuestionModel.belongsTo(SysRefParameterModel, {
+LrnQuestionModel.belongsTo(LrnExamQuestionsModel, {
   foreignKey: "exam_id",
+  as: "questions",
 });
-SysRefParameterModel.hasMany(LrnQuestionModel, {
+LrnExamQuestionsModel.hasMany(LrnQuestionModel, {
   foreignKey: "exam_id",
+  as: "questions",
 });
 
 LrnQuestionModel.belongsTo(SysRefParameterModel, {

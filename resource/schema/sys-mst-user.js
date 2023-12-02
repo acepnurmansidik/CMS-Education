@@ -1,4 +1,4 @@
-const { SysMasterUserModelDefine } = require("../models/sys-mst-user");
+const { SysMasterUserModelDefine } = require("../models/setting/sys-mst-user");
 
 const MasterUserSchema = {
   BodyMasterUserSchema: SysMasterUserModelDefine,

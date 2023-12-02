@@ -1,4 +1,4 @@
-const { SysMstModulModelDefine } = require("../models/sys-mst-modul");
+const { SysMstModulModelDefine } = require("../models/setting/sys-mst-modul");
 
 const MasterModulSchema = {
   BodyMasterModulSchema: SysMstModulModelDefine,
