@@ -17,7 +17,7 @@ service.generateExamToken = async () => {
   const tokenCode = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
   const token = [];
   for (let i = 0; i < 8; i++) {
-    token.push(tokenCode[String((Math.random() * 1000) / 36).split(".")["0"]]);
+    token.push(tokenCode[~~(Math.random() * tokenCode.length + 1)]);
   }
 
   return token.join("");
